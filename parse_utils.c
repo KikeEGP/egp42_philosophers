@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/07/24 12:23:24 by enrgil-p         ###   ########.fr       */
+/*   Created: 2025/07/24 12:14:15 by enrgil-p          #+#    #+#             */
+/*   Updated: 2025/07/24 12:24:53 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
-static void	print_expected_usage(int error_fd)
+int	char_is_digit(int c)
 {
-	print_message(EXPECTED_USAGE_1, error_fd);
-	print_message(EXPECTED_USAGE_2, error_fd);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc == 5 || argc == 6)
-	{
-		if (!parse_arguments, argc, argv)
-			return (1);
-		return (0);
-	}
-	else
-		print_expected_usage(2);
-	return (1);
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }
