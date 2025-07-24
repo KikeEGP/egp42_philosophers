@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general.h                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/07/24 11:46:34 by enrgil-p         ###   ########.fr       */
+/*   Created: 2025/07/24 11:20:08 by enrgil-p          #+#    #+#             */
+/*   Updated: 2025/07/24 11:34:41 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERAL_H
-# define GENERAL_H
+#include "general.h"
 
-# include <unistd.h>//write, usleep
-# include <stdio.h>//printf
-# include <stdlib.h>//malloc, free
-# include <string.h>//memset
-# include <pthread.h>
-# include <sys/time.h>//gettiimeofday
-# include "definitions.h"
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
 
-/*	*	utils.c	*	*/
-size_t	ft_strlen(const char *str);
-void	print_message(char *message, int fd);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
 
-#endif
+void	print_message(char *message, int fd)
+{
+	size_t	len_message;
+
+	len_message = ft_strlen(message);
+	write(fd, message, len_message);
+}

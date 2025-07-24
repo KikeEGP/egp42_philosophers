@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general.h                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/07/24 11:46:34 by enrgil-p         ###   ########.fr       */
+/*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
+/*   Updated: 2025/07/24 11:47:32 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERAL_H
-# define GENERAL_H
+#include "general.h"
 
-# include <unistd.h>//write, usleep
-# include <stdio.h>//printf
-# include <stdlib.h>//malloc, free
-# include <string.h>//memset
-# include <pthread.h>
-# include <sys/time.h>//gettiimeofday
-# include "definitions.h"
+static void	print_expected_usage(int error_fd)
+{
+	print_message(EXPECTED_USAGE_1, error_fd);
+	print_message(EXPECTED_USAGE_2, error_fd);
+}
 
-/*	*	utils.c	*	*/
-size_t	ft_strlen(const char *str);
-void	print_message(char *message, int fd);
-
-#endif
+int	main(int argc, char **argv)
+{
+	if (argc == 5 || argc == 6)
+	{
+	}
+	else
+		print_expected_usage(2);
+}

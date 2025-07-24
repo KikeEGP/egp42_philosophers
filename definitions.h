@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general.h                                          :+:      :+:    :+:   */
+/*   definitions.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/07/24 11:46:34 by enrgil-p         ###   ########.fr       */
+/*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
+/*   Updated: 2025/07/24 11:48:11 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERAL_H
-# define GENERAL_H
+#ifndef DEFINITIONS_H
+# define DEFINITIONS_H
 
-# include <unistd.h>//write, usleep
-# include <stdio.h>//printf
-# include <stdlib.h>//malloc, free
-# include <string.h>//memset
-# include <pthread.h>
-# include <sys/time.h>//gettiimeofday
-# include "definitions.h"
-
-/*	*	utils.c	*	*/
-size_t	ft_strlen(const char *str);
-void	print_message(char *message, int fd);
+# define EXPECTED_USAGE_1 "Expected usage: ./philo n_philos time_to_die "
+# define EXPECTED_USAGE_2 "time_to_eat time_to_sleep [n_meals for each philo]\n"
 
 #endif
