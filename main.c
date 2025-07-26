@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/07/24 12:23:24 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/07/26 21:50:45 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ static void	print_expected_usage(int error_fd)
 
 int	main(int argc, char **argv)
 {
+	unsigned int	parse_data[argc];
+
 	if (argc == 5 || argc == 6)
 	{
-		if (!parse_arguments, argc, argv)
+		if (!parse_arguments(argc, argv, &parse_data))
 			return (1);
 		return (0);
 	}
