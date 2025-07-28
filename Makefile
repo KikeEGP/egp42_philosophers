@@ -6,12 +6,12 @@
 #    By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/22 10:52:16 by enrgil-p          #+#    #+#              #
-#    Updated: 2025/07/24 12:07:33 by enrgil-p         ###   ########.fr        #
+#    Updated: 2025/07/28 10:57:20 by enrgil-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-SOURCES =	main.c utils.c\
+SOURCES =	main.c utils.c parse.c parse_utils.c\
 
 #libft forbidden in this project
 
