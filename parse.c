@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:11:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/08/03 16:45:18 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/08/03 20:24:06 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ static int	string_to_int(char *source_str, int *result)//in case of int
 	return (1);
 }
 
-int	parse_arguments(int argc, char **argument, unsigned int *data)
+int	parse_arguments(int argc, char **argument, unsigned int **data)
 {
 	while (--argc > 1)
 	{
 		if (!check_chars(argument[argc])
-			|| !string_to_int(argument[argc], &data[argc]))
+			|| !string_to_int(argument[argc], *data[argc - 1]))
 		{
 			print_message(WRONG_ARG, 2);
 			return (0);
