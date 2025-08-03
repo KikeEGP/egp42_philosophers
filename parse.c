@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:11:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/08/03 20:24:06 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/08/03 21:19:39 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_chars(char *argument)
 	return (1);
 }
 
-static int	ft_atoi_protected_philo(const char *str, int *counter)
+static int	ft_atouint_protected_philo(const char *str, int *counter)
 {
 	long	result;
 
@@ -35,36 +35,40 @@ static int	ft_atoi_protected_philo(const char *str, int *counter)
 	*counter = 0;
 	while ((*str >= 9 && *str <= 13) || *str == 32 || *str == '+'
 		|| (*str == '0' && *(str + 1) != '\0'))
-		str++;
+		++str;
 	while (*str >= '0' && *str <= '9')
 	{
 		result = 10 * result + (*str++ - '0');
-		(*counter)++;
+		++(*counter);
 	}
-	if (result > INT_MAX || *counter > 10)
-		return (-1);
+	if (result > UINT_MAX || *counter > 10)
+		return (0);
 	return (result);
 }
 
-//static int	string_to_int(char *source_str, unsigned int *result)
-static int	string_to_int(char *source_str, int *result)//in case of int
+#include <stdio.h>//devug, delte!!!
+static int	string_to_int(char *source_str, unsigned int *result)
 {
-	int		atoi_counter;
+	int		atouint_counter;
 
 	*result = 0;
-	atoi_counter = 0;
-	*result = ft_atoi_protected_philo(source_str, &atoi_counter);
-	if (*result < 0 || !atoi_counter)
+	atouint_counter = 0;
+	*result = ft_atouint_protected_philo(source_str, &atouint_counter);
+	printf("Converted is %u\n", *result);//debug
+	if ((*result == 0 && atouint_counter > 1) || !atouint_counter)
+	{
+		printf("Error\n");//debug
 		return (0);
+	}
 	return (1);
 }
 
-int	parse_arguments(int argc, char **argument, unsigned int **data)
+int	parse_arguments(int argc, char **argument, unsigned int *data)
 {
-	while (--argc > 1)
+	while (--argc >= 1)
 	{
 		if (!check_chars(argument[argc])
-			|| !string_to_int(argument[argc], *data[argc - 1]))
+			|| !string_to_int(argument[argc], &data[argc - 1]))
 		{
 			print_message(WRONG_ARG, 2);
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/07/28 10:58:46 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/08/03 21:04:49 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>//memset
 # include <pthread.h>
 # include <sys/time.h>//gettiimeofday
+# include <limits.h>//UINT_MAX
 # include "definitions.h"
 
 /*	*	utils.c	*	*/
