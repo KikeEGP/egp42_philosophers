@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:11:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/07/28 11:25:16 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/08/03 16:45:18 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,34 @@ static int	check_chars(char *argument)
 	return (1);
 }
 
-static int	check_valid_int(unsigned int result, int atoi_count, char *str)
+static int	ft_atoi_protected_philo(const char *str, int *counter)
 {
-	if (count > 10 && result == INT_MAX || /*In push_swap, 
-						 I call ft_atoi to check here
-						 if atoi == protected_atoi*/)
-		return (0);
-	return (1);
+	long	result;
+
+	result = 0;
+	*counter = 0;
+	while ((*str >= 9 && *str <= 13) || *str == 32 || *str == '+'
+		|| (*str == '0' && *(str + 1) != '\0'))
+		str++;
+	while (*str >= '0' && *str <= '9')
+	{
+		result = 10 * result + (*str++ - '0');
+		(*counter)++;
+	}
+	if (result > INT_MAX || *counter > 10)
+		return (-1);
+	return (result);
 }
 
-static int	string_to_int(char *source_str, unsigned int &result)
+//static int	string_to_int(char *source_str, unsigned int *result)
+static int	string_to_int(char *source_str, int *result)//in case of int
 {
 	int		atoi_counter;
 
 	*result = 0;
 	atoi_counter = 0;
-	*result = ft_atoi_protected(source_str, &atoi_counter);
-	if (!check_valid_int(*result, atoi_counter, source_str))
-		//if data == UNSIGNED_INT__MAX, check if it is true
+	*result = ft_atoi_protected_philo(source_str, &atoi_counter);
+	if (*result < 0 || !atoi_counter)
 		return (0);
 	return (1);
 }
