@@ -74,5 +74,10 @@ int	parse_arguments(int argc, char **argument, unsigned int *data)
 			return (0);
 		}
 	}
+	if (data[0] == 0)
+	{
+			print_message(ZERO_PHILOS, 2);
+			return (0);
+	}
 	return (1);
 }
