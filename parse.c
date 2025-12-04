@@ -35,7 +35,9 @@ static int	ft_atouint_protected_philo(const char *str, int *counter)
 	*counter = 0;
 	while ((*str >= 9 && *str <= 13) || *str == 32 || *str == '+'
 		|| (*str == '0' && *(str + 1) != '\0'))
-		++str;
+		++str;/*Must convert this loop
+	in a function, because "0+0 00 123"
+	it's wrong*/
 	while (*str >= '0' && *str <= '9')
 	{
 		result = 10 * result + (*str++ - '0');
