@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/08/03 21:04:49 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/12/11 18:20:57 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	ft_strlen(const char *str);
 void	print_message(char *message, int fd);
 /*	*	*	*	parse.c	*	*	*	*	*/
 int		parse_arguments(int argc, char **argument, unsigned int *data);
-/*	* parse_utils.c	*	*/
+/*	*    parse_utils.c	*	*/
 int		char_is_digit(int c);
 
 #endif
