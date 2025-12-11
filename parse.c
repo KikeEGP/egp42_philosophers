@@ -35,7 +35,9 @@ static int	ft_atouint_protected_philo(const char *str, int *counter)
 	*counter = 0;
 	while ((*str >= 9 && *str <= 13) || *str == 32 || *str == '+'
 		|| (*str == '0' && *(str + 1) != '\0'))
-		++str;
+		++str;/*Must convert this loop
+	in a function, because "0+0 00 123"
+	it's wrong*/
 	while (*str >= '0' && *str <= '9')
 	{
 		result = 10 * result + (*str++ - '0');
@@ -73,6 +75,11 @@ int	parse_arguments(int argc, char **argument, unsigned int *data)
 			print_message(WRONG_ARG, 2);
 			return (0);
 		}
+	}
+	if (data[0] == 0)
+	{
+			print_message(ZERO_PHILOS, 2);
+			return (0);
 	}
 	return (1);
 }
