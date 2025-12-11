@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:11:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/12/11 19:12:30 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:19:39 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int	string_to_int(char *source_str, unsigned int *result)
 	return (1);
 }
 
+//Parse args. Store them in an array of unsigned int
 int	parse_arguments(int argc, char **argument, unsigned int *data)
 {
 	while (--argc >= 1)
