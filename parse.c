@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:11:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/08/03 21:19:39 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:12:30 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ static int	ft_atouint_protected_philo(const char *str, int *counter)
 	*counter = 0;
 	while ((*str >= 9 && *str <= 13) || *str == 32 || *str == '+'
 		|| (*str == '0' && *(str + 1) != '\0'))
-		++str;/*Must convert this loop
-	in a function, because "0+0 00 123"
-	it's wrong*/
+		++str;
 	while (*str >= '0' && *str <= '9')
 	{
 		result = 10 * result + (*str++ - '0');
@@ -48,7 +46,6 @@ static int	ft_atouint_protected_philo(const char *str, int *counter)
 	return (result);
 }
 
-#include <stdio.h>//devug, delte!!!
 static int	string_to_int(char *source_str, unsigned int *result)
 {
 	int		atouint_counter;
@@ -56,12 +53,8 @@ static int	string_to_int(char *source_str, unsigned int *result)
 	*result = 0;
 	atouint_counter = 0;
 	*result = ft_atouint_protected_philo(source_str, &atouint_counter);
-	printf("Converted is %u\n", *result);//debug
 	if ((*result == 0 && atouint_counter > 1) || !atouint_counter)
-	{
-		printf("Error\n");//debug
 		return (0);
-	}
 	return (1);
 }
 
