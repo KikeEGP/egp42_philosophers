@@ -6,12 +6,11 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/12/11 19:13:10 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:20:16 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
-#include <stdio.h>//DELETE THIISSSSSSSSSS
 
 static void	print_expected_usage(int error_fd)
 {
