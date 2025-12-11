@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/12/11 19:20:16 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/12/11 21:27:00 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,23 @@ static void	print_expected_usage(int error_fd)
 	print_message(EXPECTED_USAGE_2, error_fd);
 }
 
+/*static void	*test(void)
+{
+	char *str = "Hello, this is thread 1\n";
+	write(1, str, ft_strlen(str));
+	return (NULL);
+}*/
+
 int	main(int argc, char **argv)
 {
 	unsigned int	parse_data[argc - 1];
+//	pthread_t	thread;//testing
 
 	if (argc == 5 || argc == 6)
 	{
 		if (!parse_arguments(argc, argv, parse_data))
 			return (1);
+		//Create philos and forks
 		return (0);
 	}
 	else
