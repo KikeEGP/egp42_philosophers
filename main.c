@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/12/15 19:52:45 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/12/15 20:05:47 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ int	main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6)
 	{
+		/*if (!parse_arguments(argc, argv, parse_data)
+			|| !create_philos(parse_data))*/
 		if (!parse_arguments(argc, argv, parse_data))
 			return (1);
+		create_philos(parse_data);
 		//Create philos and forks
 		return (0);
 	}
