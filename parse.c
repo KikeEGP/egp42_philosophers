@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:11:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/12/11 19:19:39 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/12/16 17:44:30 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_chars(char *argument)
 {
 	int	i;
-	
+
 	i = 0;
 	if (argument[i] != '+' && !char_is_digit(argument[i]))
 		return (0);
@@ -72,8 +72,8 @@ int	parse_arguments(int argc, char **argument, unsigned int *data)
 	}
 	if (data[0] == 0)
 	{
-			print_message(ZERO_PHILOS, 2);
-			return (0);
+		print_message(ZERO_PHILOS, 2);
+		return (0);
 	}
 	return (1);
 }
