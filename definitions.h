@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/12/16 17:42:48 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2025/12/16 20:06:33 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum e_parse_data_index
 	TIME_DIE,
 	TIME_EAT,
 	TIME_SLEEP,
-	EAT_MIN_TIMES,
+	EAT_MIN_TIMES
 }	t_parse_data_index;
 
 #endif
