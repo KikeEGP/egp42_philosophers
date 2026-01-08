@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/12/16 20:06:33 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/08 20:38:34 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,16 @@ typedef enum e_parse_data_index
 	TIME_SLEEP,
 	EAT_MIN_TIMES
 }	t_parse_data_index;
+
+typedef struct s_philo
+{
+	int		id;//Integer or unsigned?
+	pthread_t	thread;//Or *thread??????
+	/*type*/	fork;
+	unsigned int	die_time;
+	unsigned int	eat_time;
+	unsigned int	sleep_time;
+	unsigned int	eat_min_times;
+}	t_philo;
 
 #endif
