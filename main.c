@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/12/11 22:21:55 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/14 19:35:17 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int	main(int argc, char **argv)
 			return (1);
 		pthread_create(&thread, NULL, test, (void *)parse_data);
 		printf("Before thread, num philos is %d\n", parse_data[NUM_PHILOS]);//debug
-		++parse_data[NUM_PHILOS];
+		parse_data[NUM_PHILOS] += 4;
 		printf("Before pthread_join, increased one to num philos, so is %d\n", parse_data[NUM_PHILOS]);//debug
+		//In some cases, increase first here, in others, in thread
 		pthread_join(thread, NULL);
 		printf("After thread, num philos is %d\n", parse_data[NUM_PHILOS]);//debug
 		//Create philos and forks
