@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/16 22:24:26 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/16 23:24:41 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int	main(int argc, char **argv)
 {
 	unsigned int	parse_data[argc - 1];
 	pthread_t	thread;//testing
-	pthread_mutex_t	mutex;//testing
+	pthread_mutex_t	mutex;//I could add this to a struct, and pass this
+			      //struct as argument for thread routine
+			      //In this way, main and thread would try to 
+			      //block same mutex
 
 	if (argc == 5 || argc == 6)
 	{
@@ -55,6 +58,7 @@ int	main(int argc, char **argv)
 		//	has operated, in others is detached before
 		parse_data[TIME_SLEEP] = 1;
 		pthread_mutex_unlock(&mutex);
+		parse_data[NUM_PHILOS] += 100;
 		pthread_join(thread, NULL);
 		printf("After thread, num philos is %d\n", parse_data[NUM_PHILOS]);//debug
 		//Create philos and forks
