@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/14 19:54:06 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/16 22:24:26 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,16 @@ static void	print_expected_usage(int error_fd)
 static void	*test(void *philo)
 {
 	unsigned int *array = (unsigned int *)philo;
-	array[NUM_PHILOS] += 10;
+	int	flag = 0;
+
+	while (!flag)
+	{
+		if (array[TIME_SLEEP] == 1)
+		{
+			flag = 1;
+			array[NUM_PHILOS] += 10;
+		}
+	}
 	return (NULL);
 }
 
@@ -29,21 +38,27 @@ int	main(int argc, char **argv)
 {
 	unsigned int	parse_data[argc - 1];
 	pthread_t	thread;//testing
+	pthread_mutex_t	mutex;//testing
 
 	if (argc == 5 || argc == 6)
 	{
 		if (!parse_arguments(argc, argv, parse_data))
 			return (1);
 		pthread_create(&thread, NULL, test, (void *)parse_data);
+		pthread_mutex_init(&mutex, NULL);
+		pthread_mutex_lock(&mutex);
 		printf("Before thread, num philos is %d\n", parse_data[NUM_PHILOS]);//debug
 		parse_data[NUM_PHILOS] += 4;
 		printf("Before pthread_join, increased one to num philos, so is %d\n", parse_data[NUM_PHILOS]);//debug
 		//In some cases, increase first here, in others, in thread
 		//pthread_detach(thread);//In case of detach, sometimes thread
 		//	has operated, in others is detached before
+		parse_data[TIME_SLEEP] = 1;
+		pthread_mutex_unlock(&mutex);
 		pthread_join(thread, NULL);
 		printf("After thread, num philos is %d\n", parse_data[NUM_PHILOS]);//debug
 		//Create philos and forks
+		pthread_mutex_destroy(&mutex);
 		return (0);
 	}
 	else
