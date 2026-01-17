@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/17 20:51:43 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/17 21:15:05 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ typedef enum e_parse_data_index
 	EAT_MIN_TIMES
 }	t_parse_data_index;
 
+typedef enum e_mutex_index
+{
+	INIT = 0,
+	EAT,
+	SLEEP,
+	EAT_MIN_TIMES,
+	MAX_MUTEX
+}	t_mutex_index
+
 typedef struct s_symposium
 {
 	unsigned int	num_philos;
@@ -46,11 +55,12 @@ typedef struct s_symposium
 	unsigned int	eat_time;
 	unsigned int	sleep_time;
 	unsigned int	eat_min_times;
-	pthread_mutex_t	init_mutex;
+	pthread_mutex_t	mutex[MAX_MUTEX];//Can I use an array?
+	/*pthread_mutex_t	init_mutex;
 	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t	sleep_mutex;
 	pthread_mutex_t	die_mutex;
-	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	print_mutex;*/
 	int				threads_ready;
 	pthread_t		delphi_oracle;//Observer
 	struct s_philo	*philos_array;
