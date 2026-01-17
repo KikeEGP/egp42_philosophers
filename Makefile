@@ -6,12 +6,12 @@
 #    By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/22 10:52:16 by enrgil-p          #+#    #+#              #
-#    Updated: 2025/12/11 18:21:28 by enrgil-p         ###   ########.fr        #
+#    Updated: 2026/01/17 20:37:43 by enrgil-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-SOURCES =	main.c utils.c parse.c parse_utils.c
+SOURCES =	main.c utils.c parse.c parse_utils.c create_symposium.c
 
 #libft forbidden in this project
 
