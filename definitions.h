@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/17 18:19:56 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/17 20:51:43 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,29 @@ typedef enum e_parse_data_index
 	EAT_MIN_TIMES
 }	t_parse_data_index;
 
-typedef struct s_philo
+typedef struct s_symposium
 {
-	int		id;//Integer or unsigned?
-	pthread_t	thread;//Or *thread??????
-	/*type*/	fork;
+	unsigned int	num_philos;
 	unsigned int	die_time;
 	unsigned int	eat_time;
 	unsigned int	sleep_time;
 	unsigned int	eat_min_times;
+	pthread_mutex_t	init_mutex;
+	pthread_mutex_t	eat_mutex;
+	pthread_mutex_t	sleep_mutex;
+	pthread_mutex_t	die_mutex;
+	pthread_mutex_t	print_mutex;
+	int				threads_ready;
+	pthread_t		delphi_oracle;//Observer
+	struct s_philo	*philos_array;
+}	t_symposium;
+
+//This struct is for every philo. All of them, stored in philos_array, above
+typedef struct s_philo
+{
+	int				id;//Integer or unsigned?
+	pthread_t		thread;
+	pthread_mutex_t	fork;
 }	t_philo;
 
 #endif
