@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:11:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/08 20:26:47 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/18 16:08:38 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	string_to_int(char *source_str, unsigned int *result)
 int	parse_arguments(int argc, char **argument, unsigned int *data)
 {
 	if (argc == 5)
-		data[EAT_MIN_TIMES] = 0;//Added 8/1/26, for cases not called it
+		data[EAT_MIN_TIMES] = 0;
 	while (--argc >= 1)
 	{
 		if (!check_chars(argument[argc])
