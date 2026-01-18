@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/17 21:15:05 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/18 16:06:22 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # define EXPECTED_USAGE_2 "time_to_eat time_to_sleep [n_meals for each philo]\n"
 # define WRONG_ARG "Error. Some argument can't be converted to unsigned int\n"
 # define ZERO_PHILOS "Error. n_philos's value can't be 0\n"
-//
-# define MAX_ARGS 5
 //
 //Logs (messages for 'any state change of a philosopher')
 # define TAKE_FORK "%u %d has taken a fork\n" 
@@ -36,7 +34,8 @@ typedef enum e_parse_data_index
 	TIME_DIE,
 	TIME_EAT,
 	TIME_SLEEP,
-	EAT_MIN_TIMES
+	EAT_MIN_TIMES,
+	MAX_ARGS
 }	t_parse_data_index;
 
 typedef enum e_mutex_index
@@ -56,11 +55,11 @@ typedef struct s_symposium
 	unsigned int	sleep_time;
 	unsigned int	eat_min_times;
 	pthread_mutex_t	mutex[MAX_MUTEX];//Can I use an array?
-	/*pthread_mutex_t	init_mutex;
-	pthread_mutex_t	eat_mutex;
-	pthread_mutex_t	sleep_mutex;
-	pthread_mutex_t	die_mutex;
-	pthread_mutex_t	print_mutex;*/
+		/*pthread_mutex_t	init_mutex;
+		pthread_mutex_t	eat_mutex;
+		pthread_mutex_t	sleep_mutex;
+		pthread_mutex_t	die_mutex;
+		pthread_mutex_t	print_mutex;*/
 	int				threads_ready;
 	pthread_t		delphi_oracle;//Observer
 	struct s_philo	*philos_array;
