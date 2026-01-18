@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/17 21:19:13 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/18 16:13:43 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ static int	init_symposium_mutex(t_symposium *data)
 	return (1);
 }
 
-int	create_symposium(unsigned int *data, unsigned int num_philos, t_symposium *roundtable)
-/*t_symposium	create_symposium(unsigned int *data, unsigned int num_philos)*/
+int	create_symposium(unsigned int *data, t_symposium *roundtable)
 {
-	int		counter;
-	t_philo		philos[num_philos];//Point this with
-					   //roundtable->philos_array
+	int			counter;
+	t_philo		*philos;//Can't be stack, VLA_FORBIDDEN
 
 	add_parse_data(roundtable, data);
 	if (!init_symposium_mutex(roundtable))
@@ -54,7 +52,7 @@ int	create_symposium(unsigned int *data, unsigned int num_philos, t_symposium *r
 	roundtable->threads_ready = 0;
 	//pthread_create(&roundtable->delphi_oracle, NULL, delphi_routinei, (void *)roundtable);
 	counter = 0;
-	while (counter < num_philos)
+	while (counter < data[NUM_PHILOS])
 	{
 		//Where I do create the mutex?
 		//	In struct
