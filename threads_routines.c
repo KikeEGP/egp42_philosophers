@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/18 16:46:39 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/18 16:57:31 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 //	symp = (t_symposium)data;
 //	Wait to symposium->threads_ready
 //	Check if philos are alive
+//		//symp.philos_array[all].life_timer < symp.die_time
 //	Check if some error?
 //	if (symposium->eat_min_times != 0)
 //		check_all_eaten_min_times
@@ -32,7 +33,7 @@
 //		sleep(?);
 //	while (delphi_oracles orders stop)
 //	{
-//		take_forks();//if n% 2 == 0, fork n - 1, else fork n
+//		take_forks();//if n % 2 == 0, fork n - 1, else fork n
 //				//Later, take the other
 //				//philo 1 takes fork 1 and fork n
 //				//This actions locks 2 mutex and prints 2 logs 

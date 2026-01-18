@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/18 16:06:22 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/18 16:52:36 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_symposium
 typedef struct s_philo
 {
 	int				id;//Integer or unsigned?
+	//type??		life_timer;
+	unsigned int			eaten_times;
 	pthread_t		thread;
 	pthread_mutex_t	fork;
 }	t_philo;
