@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/18 16:13:43 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:07:26 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,7 @@ static void	add_parse_data(t_symposium *data, unsigned int *parse_data)
 	data->eat_min_times = parse_data[EAT_MIN_TIMES];
 }
 
-static int	init_symposium_mutex(t_symposium *data)
-{
-	int	i;
-	int	check;
 
-	i = 0;
-	check = 0;
-	while (i < MAX_MUTEX)
-	{
-		check = pthread_mutex_init(&data->mutex[i], NULL);
-		if (check != 0)
-		{
-			print_message("Error. A mutex init has failed\n", 2);
-			return (0);
-		}
-		++i;
-	}
-	return (1);
-}
 
 int	create_symposium(unsigned int *data, t_symposium *roundtable)
 {
@@ -50,8 +32,8 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable)
 	if (!init_symposium_mutex(roundtable))
 		return (0);
 	roundtable->threads_ready = 0;
-	//pthread_create(&roundtable->delphi_oracle, NULL, delphi_routinei, (void *)roundtable);
-	counter = 0;
+		counter = 0;
+	//malloc philos
 	while (counter < data[NUM_PHILOS])
 	{
 		//Where I do create the mutex?
@@ -65,6 +47,7 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable)
 		//	Remember, pmendez talked about five mutex, and people
 		//	use to create those five
 	}
+	//pthread_create(&roundtable->delphi_oracle, NULL, delphi_routinei, (void *)roundtable);
 	//Create here MONITOR, another thread that checks when some philo dies
 	return (1);
 }
