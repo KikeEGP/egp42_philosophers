@@ -6,9 +6,11 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/18 16:57:31 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/18 17:08:24 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "general.h"
 
 //void delphi_oracle_routine(void *data)
 //{
