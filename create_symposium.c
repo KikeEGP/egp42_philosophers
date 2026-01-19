@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/18 17:07:26 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:27:13 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void	add_parse_data(t_symposium *data, unsigned int *parse_data)
 	data->sleep_time = parse_data[TIME_SLEEP];
 	data->eat_min_times = parse_data[EAT_MIN_TIMES];
 }
-
-
 
 int	create_symposium(unsigned int *data, t_symposium *roundtable)
 {
