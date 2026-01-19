@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:11:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/19 19:53:19 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/19 20:11:27 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ static int	string_to_int(char *source_str, unsigned int *result)
 int	parse_arguments(int argc, char **argument, unsigned int *data)
 {
 	if (argc == 5)
-		data[EAT_MIN_TIMES] = 0;//In "Slack", somebody said that
-					//this arg as 0 means not to print
-					//nothing
+		data[EAT_MIN_TIMES] = 0;
 	while (--argc >= 1)
 	{
 		if (!check_chars(argument[argc])

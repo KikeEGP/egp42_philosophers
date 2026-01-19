@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/18 16:11:36 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/01/19 20:14:07 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@ int	main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6)
 	{
-		if (!parse_arguments(argc, argv, parse_data)
-			|| !create_symposium(parse_data, &program_data))
+		if (!parse_arguments(argc, argv, parse_data))
 			return (1);
+		if (argc == 6 && parse_data[EAT_MIN_TIMES] == 0)
+			return (0);
 		//Create philos and forks
+		if (!create_symposium(parse_data, &program_data))
+			return (1);
 		return (0);
 	}
 	else
