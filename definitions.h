@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/01 17:43:05 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 20:30:25 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef enum e_mutex_index
 {
 	INIT = 0,
 	EAT,
-	SLEEP,
-	EAT_MIN_TIMES,
+	DIE,
+	PRINT,
 	MAX_MUTEX
 }	t_mutex_index;
 
@@ -76,7 +76,7 @@ typedef struct s_philo
 	unsigned int			eaten_times;
 	unsigned long long		last_meal;
 	pthread_t		thread;
-	pthread_mutex_t	fork;
+	pthread_mutex_t	fork;//May do this with int, and lock with mutex
 }	t_philo;
 
 #endif
