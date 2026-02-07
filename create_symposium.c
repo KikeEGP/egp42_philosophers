@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/19 18:27:13 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/07 20:47:07 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,51 @@ static void	add_parse_data(t_symposium *data, unsigned int *parse_data)
 	data->eat_min_times = parse_data[EAT_MIN_TIMES];
 }
 
+static int	create_philos(unsigned int *data, t_symposium *roundtable)
+{
+	int	counter;
+	t_philo	new;
+
+	counter = 0;
+	while (counter < data[NUM_PHILOS])
+	{
+		new = roundtable->philos_array[counter];
+		new->id = counter + 1;		
+		new->eaten_times = 0;
+		new->last_meal = 0;//Update to start time of program.
+			   	//This is so important, is time to die
+				//Or in the thread
+		new->fork = /**/;
+		if (pthread_create(&new->thread, NULL, philo_routine,
+				(void *)roundtable) != 0)
+		++counter;
+	}
+}
+
 int	create_symposium(unsigned int *data, t_symposium *roundtable)
 {
-	int			counter;
 	t_philo		*philos;//Can't be stack, VLA_FORBIDDEN
 
 	add_parse_data(roundtable, data);
 	if (!init_symposium_mutex(roundtable))
 		return (0);
+	//lock with mutex
 	roundtable->threads_ready = 0;
-		counter = 0;
-	//malloc philos
-	while (counter < data[NUM_PHILOS])
+	roundtable->philos_array = (s_philo)malloc(data[NUM_PHILOS]
+			* sizeof(s_philo));//or t_philo?
+	if (!roundtable->philos_array || !create_philos(data, rountable) ||
+			/*!creation(delphi_oracle)*/)
 	{
-		//Where I do create the mutex?
-		//	In struct
-		philos[counter] = create_a_philo(data);
-		++counter;
-		//Array of structs?
-		//	One general, t_philo in an arry, yes
-		//Create a thread, and a fork too[not a fork(), just a 'fork']
-		//	I guess this means: struct with times and create mutex
-		//	Remember, pmendez talked about five mutex, and people
-		//	use to create those five
+		//What error? Malloc, fail of create philo?
+		//DESTROY ALL: MUTEX, MALLOCS, etc.
 	}
-	//pthread_create(&roundtable->delphi_oracle, NULL, delphi_routinei, (void *)roundtable);
+	//pthread_create(&roundtable->delphi_oracle, NULL, delphi_routine, (void *)roundtable);
 	//Create here MONITOR, another thread that checks when some philo dies
+	if (!get_time(&roundtable->start))
+	{
+		print_message("Error: gettimeofday failed", 2);
+		return (0);
+	}
+	//Unlock INIT_MUTEX
 	return (1);
 }
