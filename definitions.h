@@ -6,12 +6,20 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/08 16:58:06 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/08 19:40:44 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINITIONS_H
 # define DEFINITIONS_H
+
+/*
+  	HERE YOU WILL FIND:
+  	
+	1) defined strings
+	2) enums
+	3) structs
+*/
 
 //Errors
 # define EXPECTED_USAGE_1 "Error. Expected usage: ./philo n_philos time_to_die "
@@ -25,9 +33,9 @@
 # define SLEEP "%u %d is sleeping\n"
 # define THINK "%u %d is thinking\n"
 # define DIE "%u %d died\n"
+
 //
 /*INDEX FOR PARSE_DATA*/
-
 typedef enum e_parse_data_index
 {
 	NUM_PHILOS = 0,
@@ -38,6 +46,7 @@ typedef enum e_parse_data_index
 	MAX_ARGS
 }	t_parse_data_index;
 
+//
 //EAT_AND_STOP && NON_STOP are flags to count or not-count eaten meals,
 //also check those counters or not
 typedef enum e_expected_meals
@@ -46,14 +55,34 @@ typedef enum e_expected_meals
 	NON_STOP
 }	t_expected_meals;
 
+//
+/*INDEX FOR PARSE_DATA*/
 typedef enum e_mutex_index
 {
 	INIT = 0,
-	EAT,
-	DIE,
-	PRINT,
-	MAX_MUTEX
+	CHECK_FORK = 1,
+	EAT = 2,
+	DIE = 3,
+	PRINT = 4,
+	MAX_MUTEX = 4
 }	t_mutex_index;
+
+//
+/*Flags to check what must be destroyed and free*/
+typedef enum e_creation_failed
+{
+	CLEAN_UP_COMPLETED = 0,
+	MUTEX_FAILED = 0,
+	DESTROY_MUTEX = 0,
+	MALLOC_FAILED = 0,
+	FREE_PHILOS_ARRAY = 1,
+	PHILOS_DELETED = 1,
+	DESTROY_PHILOS = 2,
+	DELPHI_ORACLE_FAILED = 2,
+	DESTROY_DELPHI_ORACLE = 3,
+	DELETE_ALL = 3
+	SUCCESS_RETURN = 4;
+}	t_creation_failed;
 
 //Time values are ms, miliseconds. 1 sec == 1.000 ms. 
 //ms will be stored in unsigned long long
@@ -65,13 +94,8 @@ typedef struct s_symposium
 	unsigned long long	eat_time;
 	unsigned long long	sleep_time;
 	unsigned int		eat_min_times;
-	int			expected_meals;//EAT_AND_STOP || NON_STOP
-	pthread_mutex_t		mutex[MAX_MUTEX];//Can I use an array?
-		/*pthread_mutex_t	init_mutex;
-		pthread_mutex_t	eat_mutex;
-		pthread_mutex_t	sleep_mutex;
-		pthread_mutex_t	die_mutex;
-		pthread_mutex_t	print_mutex;*/
+	int					expected_meals;
+	pthread_mutex_t		mutex[MAX_MUTEX];
 	int					threads_ready;
 	pthread_t		delphi_oracle;//Observer
 	struct s_philo		*philos_array;
@@ -83,9 +107,10 @@ typedef struct s_philo
 	int				id;
 	unsigned int			eaten_times;
 	unsigned long long		last_meal;
-	int				expected_meals;
 	pthread_t		thread;
-	pthread_mutex_t	fork;//May do this with int, and lock with mutex
+	int				fork;
+	pthread_mutex_t	right_hand;//May do this with int, and lock with mutex
+	pthread_mutex_t	left_hand;//May do this with int, and lock with mutex
 }	t_philo;
 
 #endif
