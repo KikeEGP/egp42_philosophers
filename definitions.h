@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/07 20:30:25 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/08 16:58:06 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ typedef enum e_parse_data_index
 	MAX_ARGS
 }	t_parse_data_index;
 
+//EAT_AND_STOP && NON_STOP are flags to count or not-count eaten meals,
+//also check those counters or not
+typedef enum e_expected_meals
+{
+	EAT_AND_STOP,
+	NON_STOP
+}	t_expected_meals;
+
 typedef enum e_mutex_index
 {
 	INIT = 0,
@@ -57,6 +65,7 @@ typedef struct s_symposium
 	unsigned long long	eat_time;
 	unsigned long long	sleep_time;
 	unsigned int		eat_min_times;
+	int			expected_meals;//EAT_AND_STOP || NON_STOP
 	pthread_mutex_t		mutex[MAX_MUTEX];//Can I use an array?
 		/*pthread_mutex_t	init_mutex;
 		pthread_mutex_t	eat_mutex;
@@ -71,10 +80,10 @@ typedef struct s_symposium
 //This struct is for every philo. All of them, stored in philos_array, above
 typedef struct s_philo
 {
-	int				id;//Integer or unsigned?
-	//type??		life_timer;
+	int				id;
 	unsigned int			eaten_times;
 	unsigned long long		last_meal;
+	int				expected_meals;
 	pthread_t		thread;
 	pthread_mutex_t	fork;//May do this with int, and lock with mutex
 }	t_philo;
