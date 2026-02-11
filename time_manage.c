@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 17:44:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/01 18:01:39 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/11 20:33:33 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	get_time(unsigned long long *time_in_ms)
 
 	*time_in_ms = 0;
 	if (gettimeofday(&unix_time, NULL) == -1)
+	{
+		print_message("Error: gettimeofday failed\n", 2);
 		return (0);
+	}
 	*time_in_ms = (unix_time.tv_sec * 1000) + (unix_time.tv_usec / 1000);
 	return (1);
 }
