@@ -6,13 +6,13 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/08 19:05:32 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/11 21:37:30 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
-static void	add_parse_data(t_symposium *data, unsigned int *parse_data, 
+static void	add_parse_data(t_symposium *data, unsigned int *parse_data,
 		int expected_meals)
 {
 	data->num_philos = parse_data[NUM_PHILOS];
@@ -23,7 +23,44 @@ static void	add_parse_data(t_symposium *data, unsigned int *parse_data,
 	data->expected_meals = expected_meals;
 }
 
+static int	allocate_philos(t_symposium *table)
+{
+	table->philos_array = (s_philo)malloc(data[NUM_PHILOS] * sizeof(s_philo));
+	if (!table->philos_array)
+	{
+		print_message("Error: failed trying to alloc philos\n", 2);
+		return (0);
+	}
+	return (1);
+}
 
+static int	abort_symposium(t_symposium *roundtable, int error)
+{
+	while (1)
+	{
+		if (error == MALLOC_FAILED)
+		{
+			//Destroy mutex
+			break ;
+		}
+		else if (error == PHILOS_DELETED)
+		{
+			print_message("Error: failed while creating philos\n", 2);
+			return (single_clean(roundtable, PHILOS_DELETED));
+			//This can't be a return. Call to check_index_and_clean
+			free(roundtable->philos_array);
+			pthread_mutex_unlock(&mutex[INIT]);//Locked after malloc
+			//Before destroy mutex, they have to be unlocked
+		}
+		else if (error == DELPHI_ORACLE_FAILED)
+		{
+			print_message("Error: failed creating delphi_oracle\n", 2);
+			return (single_clean(roundtable, DELPHI_ORACLE_FAILED));
+		}
+		--error;
+	}
+	return (0);
+}
 
 int	create_symposium(unsigned int *data, t_symposium *roundtable,
 		int eat_times)
@@ -33,32 +70,18 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 	add_parse_data(roundtable, data, eat_times);
 	if (!init_symposium_mutex(roundtable))
 		return (0);
-	//lock with mutex
-	roundtable->threads_ready = 0;
-	roundtable->philos_array = (s_philo)malloc(data[NUM_PHILOS]
-			* sizeof(s_philo));//or t_philo?
-	if (!roundtable->philos_array)
-	{
-		print_message("Error: failed trying to alloc philos", 2);
+	if (!allocate_philos(roundtable))
 		return (clean_up(roundtable, MALLOC_FAILED));
-	}
-	if (!create_philos(data, rountable))
-	{
-		print_message("Error: failed trying to alloc philos", 2);
-		return (clean_up(roundtable, PHILOS_DELETED));
-	}
-	if (pthread_create(&roundtable->delphi_oracle, NULL, delphi_routine,
-			(void *)roundtable) != 0)
-	{
-		print_message("Error: failed creating delphi_oracle", 2);
-		return (clean_up(roundtable, DELPHI_ORACLE_FAILED));
-	}
 	if (!get_time(&roundtable->start))
-	{
-		print_message("Error: gettimeofday failed", 2);
-		return (clean_up(roundtable, DELETE_ALL));
-	}
+		return (clean_up(roundtable, GET_TIME_FAILED));
+	pthread_mutex_lock(&mutex[INIT]);
+	roundtable->threads_ready = 0;
+	if (!create_philos(data, rountable))
+		return (abort_symposium(roundtable, PHILOS_DELETED));
+	if (pthread_create(&roundtable->delphi_oracle, NULL,
+			delphi_routine, (void *)roundtable) != 0)
+		return (abort_symposium(roundtable, DELPHI_ORACLE_FAILED));
 	roundtable->threads_ready = 1;
-	//Unlock INIT_MUTEX
+	pthread_mutex_unlock(&mutex[INIT]);
 	return (1);
 }

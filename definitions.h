@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/08 19:40:44 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/11 21:35:49 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ typedef enum e_mutex_index
 typedef enum e_creation_failed
 {
 	CLEAN_UP_COMPLETED = 0,
-	MUTEX_FAILED = 0,
+	MUTEX_FAILED = 0,//Do I need this?
 	DESTROY_MUTEX = 0,
 	MALLOC_FAILED = 0,
+	GET_TIME_FAILED = 1,
 	FREE_PHILOS_ARRAY = 1,
 	PHILOS_DELETED = 1,
 	DESTROY_PHILOS = 2,
 	DELPHI_ORACLE_FAILED = 2,
 	DESTROY_DELPHI_ORACLE = 3,
-	DELETE_ALL = 3
 	SUCCESS_RETURN = 4;
 }	t_creation_failed;
 
