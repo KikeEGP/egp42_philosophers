@@ -6,25 +6,49 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 17:07:59 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/18 17:18:16 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/12 21:28:14 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
+int	destroy_single_mutex(pthread_mutex_t *mutex)
+{
+	int	check;
+
+	check = 0;
+	check = pthread_mutex_destroy(mutex);
+	if (check != 0)
+	{
+		print_message("Error. A mutex destroy has failed\n", 2);
+		return (0);
+	}
+	return (1);
+}
+
+int	init_single_mutex(pthread_mutex_t *mutex)
+{
+	int	check;
+
+	check = 0;
+	check = pthread_mutex_init(mutex, NULL);
+	if (check != 0)
+	{
+		print_message("Error. A mutex init has failed\n", 2);
+		return (0);
+	}
+	return (1);
+}
+
 int	destroy_symposium_mutex(t_symposium *data, int max_index)
 {
 	int	i;
-	int	check;
 
 	i = 0;
-	check = 0;
 	while (i < max_index)
 	{
-		check = pthread_mutex_destroy(&data->mutex[i]);
-		if (check != 0)
-		{
-			print_message("Error. A mutex destroy has failed\n", 2);
+		if (!destroy_single_mutex(&data->mutex[i]))
+		{//Really? Return 0? And doesn't continue trying to destroy?
 			return (0);
 		}
 		++i;
@@ -35,18 +59,14 @@ int	destroy_symposium_mutex(t_symposium *data, int max_index)
 int	init_symposium_mutex(t_symposium *data)
 {
 	int	i;
-	int	check;
 
 	i = 0;
-	check = 0;
 	while (i < MAX_MUTEX)
 	{
-		check = pthread_mutex_init(&data->mutex[i], NULL);
-		if (check != 0)
-		{
-			if (!destroy_symposium_mutex(data, i))
-				return (0);
-			print_message("Error. A mutex init has failed\n", 2);
+		if (!init_single_mutex(&data->mutex[i]))
+		{//Avoid a next if, never nest
+			if (!destroy_symposium_mutex(data, i))//Do I need this?
+				return (0);//In any case, I will return 0
 			return (0);
 		}
 		++i;
