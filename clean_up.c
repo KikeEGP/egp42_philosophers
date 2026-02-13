@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/11 21:36:41 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:16:21 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	clean_up(t_symposium *data, int clean_index)
 	}
 	while (clean_index >= CLEAN_UP_COMPLETED)
 	{
-		if(!single_clean(data, clean_index) && return_status)
+		if (!single_clean(data, clean_index) && return_status)
 			return_error(&return_status);
 		--clean_index;
 	}
