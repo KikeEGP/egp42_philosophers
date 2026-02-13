@@ -6,21 +6,21 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/13 14:47:24 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:44:05 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
 static void	add_parse_data(t_symposium *data, unsigned int *parse_data,
-		int expected_meals)
+		int flag_stop_eat)
 {
 	data->num_philos = parse_data[NUM_PHILOS];
 	data->die_time = parse_data[TIME_DIE];
 	data->eat_time = parse_data[TIME_EAT];
 	data->sleep_time = parse_data[TIME_SLEEP];
 	data->eat_min_times = parse_data[EAT_MIN_TIMES];
-	data->expected_meals = expected_meals;
+	data->flag_stop_eat = flag_stop_eat;
 }
 
 static int	allocate_philos(t_symposium *table)
@@ -35,11 +35,11 @@ static int	allocate_philos(t_symposium *table)
 }
 
 int	create_symposium(unsigned int *data, t_symposium *roundtable,
-		int eat_times)
+		int flag_stop_eat)
 {
 	t_philo		*philos;
 
-	add_parse_data(roundtable, data, eat_times);
+	add_parse_data(roundtable, data, flag_stop_eat);
 	if (!init_symposium_mutex(roundtable))
 		return (0);
 	if (!allocate_philos(roundtable))

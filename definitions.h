@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/11 21:35:49 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:45:23 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ typedef enum e_parse_data_index
 //
 //EAT_AND_STOP && NON_STOP are flags to count or not-count eaten meals,
 //also check those counters or not
-typedef enum e_expected_meals
+typedef enum e_flag_stop_eat
 {
 	EAT_AND_STOP,
 	NON_STOP
-}	t_expected_meals;
+}	t_flag_stop_eat;
 
 //
 /*INDEX FOR PARSE_DATA*/
@@ -94,7 +94,7 @@ typedef struct s_symposium
 	unsigned long long	eat_time;
 	unsigned long long	sleep_time;
 	unsigned int		eat_min_times;
-	int					expected_meals;
+	int					flag_stop_eat;
 	pthread_mutex_t		mutex[MAX_MUTEX];
 	int					threads_ready;
 	pthread_t		delphi_oracle;//Observer
