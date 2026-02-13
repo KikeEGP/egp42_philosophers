@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/13 15:45:23 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:48:28 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef enum e_mutex_index
 typedef enum e_creation_failed
 {
 	CLEAN_UP_COMPLETED = 0,
-	MUTEX_FAILED = 0,//Do I need this?
 	DESTROY_MUTEX = 0,
 	MALLOC_FAILED = 0,
 	GET_TIME_FAILED = 1,
