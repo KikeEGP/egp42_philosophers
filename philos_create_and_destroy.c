@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:06:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/13 16:45:27 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:56:24 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 int	destroy_philos(t_symposium *roundtable, int max_index)
 {
 	int	index;
+	t_philo	current_philo;
 
 	index = max_index;
 	while (index >= 0)
 	{
-
+		current_philo = roundtable.philos_array[index];
+		if (pthread_join(current_philo, NULL) != 0)
+			//return_status = 0; ????
+		if (!destroy_single_mutex(&philo->right_hand)//Mutex must be
+			|| !destroy_single_mutex(&philo->left_hand))//unlocked
+			//return_status = 0; ????
 		--index;
 	}
 	 //if everthing okay, return 1

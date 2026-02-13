@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/13 14:46:29 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:04:52 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@ static void	return_error(int *return_status)
 
 int	single_clean(t_symposium *data, int now_it_is_turn_to)
 {
+	int	return_status;
+
+	return_status = 1;
 	if (now_is_turn_to == DESTROY_MUTEX)//Last to manage
-		return (/*function to destroy mutex*/);
+		return_status = destroy_symposium_mutex(data, MAX_MUTEX);
 	else if (now_is_turn_to == FREE_PHILOS_ARRAY)
 		free(data->philos_array);
 	else if (now_is_turn_to == DESTROY_PHILOS)
-		return (/*function to destroy mutex*/);
+		return_status = destroy_philos(data, data->num_philos);
 	else if (now_is_turn_to == DESTROY_DELPHI_ORACLE)//First to manage
-		return (/*function to destroy mutex*/);
-	return (1);
+		return_status = (/*function to destroy oracle*/);
+	return (return_status);
 }
 
 //Created for clen in every case, now is only expected in case of successful
