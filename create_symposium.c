@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/11 21:37:30 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:47:24 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,6 @@ static int	allocate_philos(t_symposium *table)
 	return (1);
 }
 
-static int	abort_symposium(t_symposium *roundtable, int error)
-{
-	while (1)
-	{
-		if (error == MALLOC_FAILED)
-		{
-			//Destroy mutex
-			break ;
-		}
-		else if (error == PHILOS_DELETED)
-		{
-			print_message("Error: failed while creating philos\n", 2);
-			return (single_clean(roundtable, PHILOS_DELETED));
-			//This can't be a return. Call to check_index_and_clean
-			free(roundtable->philos_array);
-			pthread_mutex_unlock(&mutex[INIT]);//Locked after malloc
-			//Before destroy mutex, they have to be unlocked
-		}
-		else if (error == DELPHI_ORACLE_FAILED)
-		{
-			print_message("Error: failed creating delphi_oracle\n", 2);
-			return (single_clean(roundtable, DELPHI_ORACLE_FAILED));
-		}
-		--error;
-	}
-	return (0);
-}
-
 int	create_symposium(unsigned int *data, t_symposium *roundtable,
 		int eat_times)
 {
@@ -71,9 +43,9 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 	if (!init_symposium_mutex(roundtable))
 		return (0);
 	if (!allocate_philos(roundtable))
-		return (clean_up(roundtable, MALLOC_FAILED));
+		return (abort_symposium(roundtable, MALLOC_FAILED));
 	if (!get_time(&roundtable->start))
-		return (clean_up(roundtable, GET_TIME_FAILED));
+		return (abort_symposium(roundtable, GET_TIME_FAILED));
 	pthread_mutex_lock(&mutex[INIT]);
 	roundtable->threads_ready = 0;
 	if (!create_philos(data, rountable))

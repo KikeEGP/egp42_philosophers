@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/13 14:16:21 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:46:29 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	single_clean(t_symposium *data, int now_it_is_turn_to)
 	return (1);
 }
 
+//Created for clen in every case, now is only expected in case of successful
+//end of execution. In any case, I prefer to guarantee that program pass
+//a flag of SUCCESS_RETURN
 int	clean_up(t_symposium *data, int clean_index)
 {
 	int	return_status;
@@ -46,4 +49,33 @@ int	clean_up(t_symposium *data, int clean_index)
 			return_error(&return_status);
 		--clean_index;
 	}
+}
+
+//Like clean_up, only for fails while create_symposium though.
+//Main difference consist in need of unlock init's mutex 
+//after threads have been joined
+static int	abort_symposium(t_symposium *roundtable, int error)
+{
+	while (1)
+	{
+		if (error == MALLOC_FAILED)
+		{
+			single_clean(roundtable, DESTROY_MUTEX);
+			break ;
+		}
+		else if (error == PHILOS_DELETED)
+		{
+			print_message("Error: failed while creating philos\n", 2);
+			single_clean(roundtable, FREE_PHILOS_ARRAY);
+			pthread_mutex_unlock(&mutex[INIT]);//Locked after malloc
+			//Before destroy mutex, they have to be unlocked
+		}
+		else if (error == DELPHI_ORACLE_FAILED)
+		{
+			print_message("Error: failed creating delphi_oracle\n", 2);
+			single_clean(roundtable, DESTROY_PHILOS);
+		}
+		--error;
+	}
+	return (0);
 }
