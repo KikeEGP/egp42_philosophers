@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/13 15:44:05 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:15:06 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	add_parse_data(t_symposium *data, unsigned int *parse_data,
 	data->sleep_time = parse_data[TIME_SLEEP];
 	data->eat_min_times = parse_data[EAT_MIN_TIMES];
 	data->flag_stop_eat = flag_stop_eat;
+	data->dead_found = 0;
 }
 
 static int	allocate_philos(t_symposium *table)
@@ -31,6 +32,13 @@ static int	allocate_philos(t_symposium *table)
 		print_message("Error: failed trying to alloc philos\n", 2);
 		return (0);
 	}
+	return (1);
+}
+
+static int	end_of_symposium(t_symposium *roundtable)
+{
+	//When dead_found == 1, end all. However, this is
+	//delphi_oracle business, isn't it?
 	return (1);
 }
 
@@ -55,5 +63,5 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 		return (abort_symposium(roundtable, DELPHI_ORACLE_FAILED));
 	roundtable->threads_ready = 1;
 	pthread_mutex_unlock(&mutex[INIT]);
-	return (1);
+	return (end_of_symposium(roundtable));//Correct?
 }
