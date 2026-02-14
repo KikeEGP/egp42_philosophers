@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/13 16:59:09 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 17:44:33 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ typedef enum e_flag_stop_eat
 /*INDEX FOR PARSE_DATA*/
 typedef enum e_mutex_index
 {
-	INIT = 0,
-	CHECK_FORK,
-	EAT,
-	DIE,
-	PRINT,
+	INIT_MUTEX = 0,
+	CHECK_FORK_MUTEX,
+	EAT_MUTEX,
+	DIE_MUTEX,
+	PRINT_MUTEX,
 	MAX_MUTEX
 }	t_mutex_index;
 

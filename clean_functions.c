@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/13 17:04:52 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 17:23:23 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	single_clean(t_symposium *data, int now_it_is_turn_to)
 {
 	int	return_status;
 
+	//Do some of this functions print a message in case of error?
 	return_status = 1;
 	if (now_is_turn_to == DESTROY_MUTEX)//Last to manage
 		return_status = destroy_symposium_mutex(data, MAX_MUTEX);
@@ -29,7 +30,10 @@ int	single_clean(t_symposium *data, int now_it_is_turn_to)
 	else if (now_is_turn_to == DESTROY_PHILOS)
 		return_status = destroy_philos(data, data->num_philos);
 	else if (now_is_turn_to == DESTROY_DELPHI_ORACLE)//First to manage
-		return_status = (/*function to destroy oracle*/);
+	{
+		if (pthread_join(&data->delphi_oracle, NULL) != 0)
+			return_status = 0;
+	}
 	return (return_status);
 }
 
