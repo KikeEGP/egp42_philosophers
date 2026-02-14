@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 17:44:33 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 17:47:05 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef enum e_creation_failed
 	DESTROY_PHILOS = 2,
 	DELPHI_ORACLE_FAILED = 2,
 	DESTROY_DELPHI_ORACLE = 3,
-	SUCCESS_RETURN = 4;
+	SUCCESS_RETURN = 4
 }	t_creation_failed;
 
 //Time values are ms, miliseconds. 1 sec == 1.000 ms. 

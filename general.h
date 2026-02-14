@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2025/12/11 18:20:57 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 19:23:35 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,45 @@
 /*	*	utils.c	*	*/
 size_t	ft_strlen(const char *str);
 void	print_message(char *message, int fd);
+//
+//
 /*	*	*	*	parse.c	*	*	*	*	*/
 int		parse_arguments(int argc, char **argument, unsigned int *data);
 /*	*    parse_utils.c	*	*/
 int		char_is_digit(int c);
+//
+//
+/*	*	*	* create_symposium.c	*	*	*	*/
+int		create_symposium(unsigned int *data,
+			t_symposium *roundtable, int flag_stop_eat);
+//
+//
+/*	*	*	mutex_init_and_destroy.c	*	*	*/
+int		destroy_single_mutex(pthread_mutex_t *mutex);
+int		init_single_mutex(pthread_mutex_t *mutex);
+int		destroy_symposium_mutex(t_symposium *data, int max_index);
+int		init_symposium_mutex(t_symposium *data);
+//
+//
+/*	*	*	* clean_functions.c	*	*	*	*/
+int		single_clean(t_symposium *data, int now_it_is_turn_to);
+int		clean_up(t_symposium *data, int clean_index);
+int		abort_symposium(t_symposium *roundtable, int error);
+//
+//
+/*	*	*	*	time_manage.c	*	*	*	*/
+int		get_time(unsigned long long *time_in_ms);
+int		check_time(unsigned long long last_meal,
+			unsigned long long time_to_check);
+//
+//
+/*	*	*	* philos_create_and_destroy.c	*	*	*/
+int		destroy_philos(t_symposium *roundtable, int max_index);
+int		create_philos(unsigned int *data, t_symposium *roundtable);
+//
+//
+/*	*	*	* threads_routines.c	*	*	*	**/
+void	delphi_oracle_routine(void *data);
+void	philo_routine(void *data);
 
 #endif

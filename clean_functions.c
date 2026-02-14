@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 17:23:23 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:22:47 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	clean_up(t_symposium *data, int clean_index)
 //Like clean_up, only for fails while create_symposium though.
 //Main difference consist in need of unlock init's mutex 
 //after threads have been joined
-static int	abort_symposium(t_symposium *roundtable, int error)
+int	abort_symposium(t_symposium *roundtable, int error)
 {
 	while (1)
 	{

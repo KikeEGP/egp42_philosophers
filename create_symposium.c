@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/13 16:15:06 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 19:24:13 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	add_parse_data(t_symposium *data, unsigned int *parse_data,
 	data->dead_found = 0;
 }
 
-static int	allocate_philos(t_symposium *table)
+static int	allocate_philos(unsigned int *data, t_symposium *table)
 {
-	table->philos_array = (s_philo)malloc(data[NUM_PHILOS] * sizeof(s_philo));
+	table->philos_array = (t_philo *)malloc(data[NUM_PHILOS] * sizeof(t_philo));
 	if (!table->philos_array)
 	{
 		print_message("Error: failed trying to alloc philos\n", 2);
@@ -37,6 +37,7 @@ static int	allocate_philos(t_symposium *table)
 
 static int	end_of_symposium(t_symposium *roundtable)
 {
+	(void)roundtable;//DELETE THIS
 	//When dead_found == 1, end all. However, this is
 	//delphi_oracle business, isn't it?
 	return (1);
@@ -50,16 +51,16 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 	add_parse_data(roundtable, data, flag_stop_eat);
 	if (!init_symposium_mutex(roundtable))
 		return (0);
-	if (!allocate_philos(roundtable))
+	if (!allocate_philos(data, roundtable))
 		return (abort_symposium(roundtable, MALLOC_FAILED));
 	if (!get_time(&roundtable->start))
 		return (abort_symposium(roundtable, GET_TIME_FAILED));
-	pthread_mutex_lock(&mutex[INIT]);
+	pthread_mutex_lock(&roundtable->mutex[INIT_MUTEX]);
 	roundtable->threads_ready = 0;
-	if (!create_philos(data, rountable))
+	if (!create_philos(data, roundtable))
 		return (abort_symposium(roundtable, PHILOS_DELETED));
 	if (pthread_create(&roundtable->delphi_oracle, NULL,
-			delphi_routine, (void *)roundtable) != 0)
+			delphi_oracle_routine, (void *)roundtable) != 0)
 		return (abort_symposium(roundtable, DELPHI_ORACLE_FAILED));
 	roundtable->threads_ready = 1;
 	pthread_mutex_unlock(&mutex[INIT]);

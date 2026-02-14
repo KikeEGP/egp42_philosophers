@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 17:44:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/11 20:33:33 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:25:42 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_time(unsigned long long last_meal,
 	unsigned long long	now;
 
 	if (!get_time(&now))
-		return (2);
+		return (2);//Check this
 	if ((now - last_meal) >= time_to_check)
 		return (0);
 	return (1);
