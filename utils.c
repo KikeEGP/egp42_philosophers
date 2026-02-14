@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:20:08 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/01/17 18:55:14 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:09:48 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ void	print_message(char *message, int fd)
 	write(fd, message, len_message);
 }
 
-void	state_change_log(char *message, /*time?*/, t_symposium *data)
+/*
+void	state_change_log(char *message, *time?*, t_symposium *data)
 {
 	//Obtain time??
 	t_philo	philo;
 
-	philo = data->philos_array[/*index?*/];
-	printf(message, /*time*/, philo->id);
-}
+	philo = data->philos_array[*index?*];
+	printf(message, *time*, philo->id);
+}*/

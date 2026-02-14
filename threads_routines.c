@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 17:38:44 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 18:10:15 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	philo_routine(void *data)
 	
 	symp = (t_symposium)data;
 	printf("Hello\n");
+	//Log states function is already defined on utils.c
 //	Wait to symposium->threads_ready
 /*	if (philo->id % 2 == 0)
 		sleep(/?*);
