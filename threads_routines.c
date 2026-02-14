@@ -6,13 +6,13 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 19:21:02 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 19:28:15 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
-void	delphi_oracle_routine(void *data)
+void	*delphi_oracle_routine(void *data)
 {
 	t_symposium	symp;
 
@@ -24,9 +24,10 @@ void	delphi_oracle_routine(void *data)
 	Check if some error?
 	if (symposium->eat_min_times != 0)
 		check_all_eaten_min_times*/
+	return (NULL);
 }
 
-void	philo_routine(void *data)
+void	*philo_routine(void *data)
 {
 	t_symposium	symp;
 	
@@ -54,4 +55,5 @@ void	philo_routine(void *data)
 			//Think is only time since philo has awaken 
 			//and starts to eat again. This means: waits free fork
 	}*/
+	return (NULL);
 }

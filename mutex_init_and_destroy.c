@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 17:07:59 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 17:45:44 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 19:35:06 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	destroy_symposium_mutex(t_symposium *data, int max_index)
 	i = 0;
 	while (i < max_index)
 	{
-		if (!destroy_single_mutex(&data.mutex[i]))
+		if (!destroy_single_mutex(&data->mutex[i]))
 		{//Really? Return 0? And doesn't continue trying to destroy?
 			return (0);
 		}
@@ -63,7 +63,7 @@ int	init_symposium_mutex(t_symposium *data)
 	i = 0;
 	while (i < MAX_MUTEX)
 	{
-		if (!init_single_mutex(&data.mutex[i]))
+		if (!init_single_mutex(&data->mutex[i]))
 		{//Avoid a next if, never nest
 			if (!destroy_symposium_mutex(data, i))//Do I need this?
 				return (0);//In any case, I will return 0

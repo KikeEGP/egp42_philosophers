@@ -6,12 +6,20 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 19:23:35 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/14 19:33:09 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GENERAL_H
 # define GENERAL_H
+
+/*
+  	HERE YOU WILL FIND:
+ 
+  	1) header files needed by allowed functions for this project 
+		that has been used
+  	2) prototypes of functions created for this project
+*/
 
 # include <unistd.h>//write, usleep
 # include <stdio.h>//printf
@@ -63,7 +71,7 @@ int		create_philos(unsigned int *data, t_symposium *roundtable);
 //
 //
 /*	*	*	* threads_routines.c	*	*	*	**/
-void	delphi_oracle_routine(void *data);
-void	philo_routine(void *data);
+void	*delphi_oracle_routine(void *data);
+void	*philo_routine(void *data);
 
 #endif
