@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 18:22:47 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 12:58:43 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	return_error(int *return_status)
 	*return_status = 0;
 }
 
-int	single_clean(t_symposium *data, int now_it_is_turn_to)
+int	single_clean(t_symposium *data, int now_is_turn_to)
 {
 	int	return_status;
 
@@ -31,7 +31,7 @@ int	single_clean(t_symposium *data, int now_it_is_turn_to)
 		return_status = destroy_philos(data, data->num_philos);
 	else if (now_is_turn_to == DESTROY_DELPHI_ORACLE)//First to manage
 	{
-		if (pthread_join(&data->delphi_oracle, NULL) != 0)
+		if (pthread_join(data->delphi_oracle, NULL) != 0)
 			return_status = 0;
 	}
 	return (return_status);
@@ -56,6 +56,7 @@ int	clean_up(t_symposium *data, int clean_index)
 			return_error(&return_status);
 		--clean_index;
 	}
+	return (return_status);
 }
 
 //Like clean_up, only for fails while create_symposium though.
@@ -74,7 +75,7 @@ int	abort_symposium(t_symposium *roundtable, int error)
 		{
 			print_message("Error: failed while creating philos\n", 2);
 			single_clean(roundtable, FREE_PHILOS_ARRAY);
-			pthread_mutex_unlock(&mutex[INIT]);//Locked after malloc
+			pthread_mutex_unlock(&roundtable->mutex[INIT_MUTEX]);//Locked after malloc
 			//Before destroy mutex, they have to be unlocked
 		}
 		else if (error == DELPHI_ORACLE_FAILED)
