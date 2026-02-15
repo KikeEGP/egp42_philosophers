@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 18:41:12 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 19:09:18 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef enum e_fork_state
 }	t_fork_state;
 
 //Time values are ms, miliseconds. 1 sec == 1.000 ms. 
-//ms will be stored in unsigned long long
+//ms will be stored in unsigned long long. "delphi_oracle" == monitor, observer
 typedef struct s_symposium
 {
 	unsigned int		num_philos;
@@ -103,21 +103,21 @@ typedef struct s_symposium
 	pthread_mutex_t		symp_mutex[MAX_MUTEX];
 	pthread_mutex_t		*fork_mutex;
 	int					threads_ready;
-	pthread_t		delphi_oracle;//Observer
+	pthread_t			delphi_oracle;
 	struct s_philo		*philos_array;
 }	t_symposium;
 
 //This struct is for every philo. All of them, stored in philos_array, above
 typedef struct s_philo
 {
-	int				id;
-	unsigned int			eaten_times;
-	unsigned long long		last_meal;
-	pthread_t		thread;
-	int				fork;
-	pthread_mutex_t	right_hand;//May do this with int, and lock with mutex
-	pthread_mutex_t	left_hand;//May do this with int, and lock with mutex
-	t_symposium	*symposium;
+	int					id;
+	unsigned long long	last_meal;
+	unsigned int		eaten_times;
+	pthread_t			thread;
+	int					fork;
+	pthread_mutex_t		right_hand;
+	pthread_mutex_t		left_hand;
+	t_symposium			*symposium;
 }	t_philo;
 
 #endif

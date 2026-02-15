@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 18:00:29 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 18:51:41 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ int		create_philos(unsigned int *data, t_symposium *roundtable);
 /*	*	*	* threads_routines.c	*	*	*	**/
 void	*delphi_oracle_routine(void *data);
 void	*philo_routine(void *data);
+/*	*    routines_utils.c	*	*/
+void	wait_all_threads(t_symposium *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 17:09:13 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 18:54:28 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*delphi_oracle_routine(void *data)
 	t_symposium	*symp;
 
 	symp = (t_symposium *)data;
+	wait_all_threads(symp);	
+	usleep(10000);
 	printf("Hello, i'm delphi orcale\n");
 	/*Wait to symposium->threads_ready
 	Check if philos are alive
@@ -30,8 +32,11 @@ void	*delphi_oracle_routine(void *data)
 void	*philo_routine(void *has_taken_a_seat)
 {
 	t_philo	*philo;
+	t_symposium *table;
 	
 	philo = (t_philo *)has_taken_a_seat;
+	table = philo->symposium;
+	wait_all_threads(table);	
 	printf("%d Hello\n", philo->id);
 	//Log states function is already defined on utils.c
 //	Wait to symposium->threads_ready

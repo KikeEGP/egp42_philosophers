@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 17:48:55 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 19:00:51 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	print_expected_usage(int error_fd)
 
 int	main(int argc, char **argv)
 {
+	t_symposium		program_data;
 	unsigned int	parse_data[MAX_ARGS];
-	t_symposium	program_data;
-	int		flag_stop_eat;
+	int				flag_stop_eat;
 
 	if (argc == 5 || argc == 6)
 	{

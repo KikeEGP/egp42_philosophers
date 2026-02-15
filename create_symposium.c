@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 18:10:14 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 19:05:32 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	add_parse_data(t_symposium *data, unsigned int *parse_data,
 static int	alloc_chairs_and_forks(t_symposium *table)
 {
 	unsigned int	expected;
-	int		philo_size;
-	int		f_m_size;
+	int				philo_size;
+	int				f_m_size;
 
 	expected = table->num_philos;
 	philo_size = sizeof(t_philo);
@@ -46,7 +46,6 @@ static int	alloc_chairs_and_forks(t_symposium *table)
 		print_message("Error: failed trying to alloc fork_mutex\n", 2);
 		return (0);
 	}
-
 	return (1);
 }
 
@@ -81,5 +80,5 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 		return (abort_symposium(roundtable, DELPHI_ORACLE_FAILED));
 	roundtable->threads_ready = 1;
 	pthread_mutex_unlock(&roundtable->symp_mutex[INIT_MUTEX]);
-	return (clean_up(roundtable, SUCCESS_RETURN));//Correct?
+	return (clean_up(roundtable, SUCCESS_RETURN));
 }
