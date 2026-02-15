@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 18:51:41 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 19:19:33 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	print_message(char *message, int fd);
 //
 /*	*	*	*	parse.c	*	*	*	*	*/
 int		parse_arguments(int argc, char **argument, unsigned int *data);
-/*	*    parse_utils.c	*	*/
-int		char_is_digit(int c);
 //
 //
 /*	*	*	* create_symposium.c	*	*	*	*/

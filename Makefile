@@ -6,12 +6,12 @@
 #    By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/22 10:52:16 by enrgil-p          #+#    #+#              #
-#    Updated: 2026/02/15 18:52:36 by enrgil-p         ###   ########.fr        #
+#    Updated: 2026/02/15 19:19:58 by enrgil-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-SOURCES =	main.c utils.c parse.c parse_utils.c create_symposium.c\
+SOURCES =	main.c utils.c parse.c create_symposium.c\
 		mutex_init_and_destroy.c philos_create_and_destroy.c\
 		clean_functions.c threads_routines.c routines_utils.c\
 		time_manage.c
