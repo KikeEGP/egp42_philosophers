@@ -6,15 +6,27 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 14:14:15 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 17:54:11 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
-static void	return_error(int *return_status)
+static void	free_table(t_symposium *roundtable)
 {
-	*return_status = 0;
+	free(roundtable->fork_mutex);
+	free(roundtable->philos_array);
+}
+
+static int	destroy_symposium_mutex(t_symposium *data)
+{
+	int	return_status;
+
+	return_status = 1;
+	if (!destroy_array_mutex(data->symp_mutex, MAX_MUTEX)
+		|| !destroy_array_mutex(data->fork_mutex, num_philos))
+		return_status = 0;
+	return (return_status);
 }
 
 int	single_clean(t_symposium *data, int now_is_turn_to)
@@ -25,8 +37,8 @@ int	single_clean(t_symposium *data, int now_is_turn_to)
 	return_status = 1;
 	if (now_is_turn_to == DESTROY_MUTEX)//Last to manage
 		return_status = destroy_symposium_mutex(data, MAX_MUTEX);
-	else if (now_is_turn_to == FREE_PHILOS_ARRAY)
-		free(data->philos_array);
+	else if (now_is_turn_to == FREE_ALLOCATIONS)
+		free_table(data);
 	else if (now_is_turn_to == DESTROY_PHILOS)
 		return_status = destroy_philos(data, data->num_philos);
 	else if (now_is_turn_to == DESTROY_DELPHI_ORACLE)//First to manage
@@ -44,7 +56,7 @@ int	clean_up(t_symposium *data, int clean_index)
 {
 	int	return_status;
 
-	return_error(&return_status);
+	return_status = 0;
 	if (clean_index == SUCCESS_RETURN)
 	{
 		return_status = 1;
@@ -53,7 +65,7 @@ int	clean_up(t_symposium *data, int clean_index)
 	while (clean_index >= CLEAN_UP_COMPLETED)
 	{
 		if (!single_clean(data, clean_index) && return_status)
-			return_error(&return_status);
+			return_status = 0;
 		--clean_index;
 	}
 	return (return_status);
@@ -74,7 +86,7 @@ int	abort_symposium(t_symposium *roundtable, int error)
 		else if (error == PHILOS_DELETED)
 		{
 			print_message("Error: failed while creating philos\n", 2);
-			single_clean(roundtable, FREE_PHILOS_ARRAY);
+			single_clean(roundtable, FREE_ALLOCATIONS);
 			pthread_mutex_unlock(&roundtable->mutex[INIT_MUTEX]);//Locked after malloc
 			//Before destroy mutex, they have to be unlocked
 		}

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:06:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 14:29:15 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 17:05:17 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	destroy_philos(t_symposium *roundtable, int max_index)
 	{
 		current_philo = roundtable->philos_array[index];
 		//First, destroy mutex. Then you can join the thread
+		printf("Hi, index %d\n", index);
 		if (!destroy_single_mutex(&current_philo.right_hand)
 			|| !destroy_single_mutex(&current_philo.left_hand))
 			return_status = 0;//????

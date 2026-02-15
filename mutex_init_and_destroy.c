@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 17:07:59 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 14:21:25 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 17:51:26 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,32 @@ int	init_single_mutex(pthread_mutex_t *mutex)
 	return (1);
 }
 
-int	destroy_symposium_mutex(t_symposium *data, int max_index)
+int	destroy_array_mutex(t_symposium *data, int max_index)
+{
+	int	return_status;
+	int	i;
+
+	return_status = 1;
+	i = 0;
+	while (i < max_index)
+	{
+		if (!destroy_single_mutex(&data->mutex[i]))
+			return_status = 0;
+		++i;
+	}
+	return (return_status);
+}
+
+int	init_array_mutex(t_symposium *data, int max_index)
 {
 	int	i;
 
 	i = 0;
 	while (i < max_index)
 	{
-		if (!destroy_single_mutex(&data->mutex[i]))
-		{//Really? Return 0? And doesn't continue trying to destroy?
-			return (0);
-		}
-		++i;
-	}
-	return (1);
-}
-
-int	init_symposium_mutex(t_symposium *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < MAX_MUTEX)
-	{
 		if (!init_single_mutex(&data->mutex[i]))
-		{//Avoid a next if, never nest
-			if (!destroy_symposium_mutex(data, i))//Do I need this?
-				return (0);//In any case, I will return 0
+		{
+			destroy_array_mutex(data, i)
 			return (0);
 		}
 		++i;

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 14:31:17 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 17:51:19 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,39 @@ static void	add_parse_data(t_symposium *data, unsigned int *parse_data,
 	data->dead_found = 0;
 }
 
-static int	allocate_philos(unsigned int *data, t_symposium *table)
+static int	alloc_chairs_and_forks(t_symposium *table)
 {
-	table->philos_array = (t_philo *)malloc(data[NUM_PHILOS] * sizeof(t_philo));
+	unsigned int	expected;
+	int		philo_size;
+	int		f_m_size;
+
+	expected = table->num_philos;
+	philo_size = sizeof(t_philo);
+	f_m_size = sizeof(pthread_mutex_t);
+	table->philos_array = (t_philo *)malloc(expected * philo_size);
 	if (!table->philos_array)
 	{
 		print_message("Error: failed trying to alloc philos\n", 2);
+		return (0);
+	}
+	table->fork_mutex = (pthread_mutex_t *)malloc(expected * f_m_size);
+	if (!table->fork_mutex)
+	{
+		free(table->philos_array);
+		print_message("Error: failed trying to alloc fork_mutex\n", 2);
+		return (0);
+	}
+
+	return (1);
+}
+
+static int	init_symposium_mutex(t_symposium *data)
+{
+	if (!init_array_mutex(data->symp_mutex, MAX_MUTEX))
+		return (0);
+	if (!init_array_mutex(data->fork_mutex, num_philos))
+	{
+		destroy_array_mutex(data->symp_mutex, MAX_MUTEX);
 		return (0);
 	}
 	return (1);
@@ -41,7 +68,7 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 	add_parse_data(roundtable, data, flag_stop_eat);
 	if (!init_symposium_mutex(roundtable))
 		return (0);
-	if (!allocate_philos(data, roundtable))
+	if (!alloc_chairs_and_forks(roundtable))
 		return (abort_symposium(roundtable, MALLOC_FAILED));
 	if (!get_time(&roundtable->start))
 		return (abort_symposium(roundtable, GET_TIME_FAILED));

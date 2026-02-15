@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 13:20:11 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 17:34:08 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef enum e_flag_stop_eat
 typedef enum e_mutex_index
 {
 	INIT_MUTEX = 0,
-	CHECK_FORK_MUTEX,
 	EAT_MUTEX,
 	DIE_MUTEX,
 	PRINT_MUTEX,
@@ -75,7 +74,7 @@ typedef enum e_creation_failed
 	DESTROY_MUTEX = 0,
 	MALLOC_FAILED = 0,
 	GET_TIME_FAILED = 1,
-	FREE_PHILOS_ARRAY = 1,
+	FREE_ALLOCATIONS = 1,
 	PHILOS_DELETED = 1,
 	DESTROY_PHILOS = 2,
 	DELPHI_ORACLE_FAILED = 2,
@@ -95,7 +94,8 @@ typedef struct s_symposium
 	unsigned int		eat_min_times;
 	int					flag_stop_eat;
 	int					dead_found;
-	pthread_mutex_t		mutex[MAX_MUTEX];
+	pthread_mutex_t		symp_mutex[MAX_MUTEX];
+	pthread_mutex_t		*fork_mutex;
 	int					threads_ready;
 	pthread_t		delphi_oracle;//Observer
 	struct s_philo		*philos_array;
