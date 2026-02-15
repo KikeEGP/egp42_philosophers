@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 19:34:16 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 14:31:17 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ static int	allocate_philos(unsigned int *data, t_symposium *table)
 	return (1);
 }
 
-static int	end_of_symposium(t_symposium *roundtable)
-{
-	(void)roundtable;//DELETE THIS
-	//When dead_found == 1, end all. However, this is
-	//delphi_oracle business, isn't it?
-	return (1);
-}
-
 int	create_symposium(unsigned int *data, t_symposium *roundtable,
 		int flag_stop_eat)
 {
@@ -62,5 +54,5 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 		return (abort_symposium(roundtable, DELPHI_ORACLE_FAILED));
 	roundtable->threads_ready = 1;
 	pthread_mutex_unlock(&roundtable->mutex[INIT_MUTEX]);
-	return (end_of_symposium(roundtable));//Correct?
+	return (clean_up(roundtable, SUCCESS_RETURN));//Correct?
 }

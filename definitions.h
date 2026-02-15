@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 17:47:05 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 13:20:11 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_philo
 	int				fork;
 	pthread_mutex_t	right_hand;//May do this with int, and lock with mutex
 	pthread_mutex_t	left_hand;//May do this with int, and lock with mutex
+	t_symposium	*symposium;
 }	t_philo;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 13:00:59 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 13:47:47 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	*delphi_oracle_routine(void *data)
 	Check if some error?
 	if (symposium->eat_min_times != 0)
 		check_all_eaten_min_times*/
-	return (NULL);
+	return (data);
 }
 
-void	*philo_routine(void *data)
+void	*philo_routine(void *has_taken_a_seat)
 {
-	t_symposium	*symp;
+	t_philo	*philo;
 	
-	symp = (t_symposium *)data;
-	printf("Hello\n");
+	philo = (t_philo *)has_taken_a_seat;
+	printf("%d Hello\n", philo->id);
 	//Log states function is already defined on utils.c
 //	Wait to symposium->threads_ready
 /*	if (philo->id % 2 == 0)
@@ -55,5 +55,5 @@ void	*philo_routine(void *data)
 			//Think is only time since philo has awaken 
 			//and starts to eat again. This means: waits free fork
 	}*/
-	return (NULL);
+	return (has_taken_a_seat);
 }
