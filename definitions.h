@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 17:34:08 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 18:41:12 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,22 @@ typedef enum e_mutex_index
 typedef enum e_creation_failed
 {
 	CLEAN_UP_COMPLETED = 0,
-	DESTROY_MUTEX = 0,
-	MALLOC_FAILED = 0,
+	FREE_ALLOCATIONS = 0,
+	MUTEX_FAILED = 0,
+	DESTROY_MUTEX = 1,
 	GET_TIME_FAILED = 1,
-	FREE_ALLOCATIONS = 1,
 	PHILOS_DELETED = 1,
 	DESTROY_PHILOS = 2,
 	DELPHI_ORACLE_FAILED = 2,
 	DESTROY_DELPHI_ORACLE = 3,
 	SUCCESS_RETURN = 4
 }	t_creation_failed;
+
+typedef enum e_fork_state
+{
+	FORK_TAKEN = 0,
+	FORK_FREE
+}	t_fork_state;
 
 //Time values are ms, miliseconds. 1 sec == 1.000 ms. 
 //ms will be stored in unsigned long long

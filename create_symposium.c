@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 17:51:19 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 18:10:14 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	init_symposium_mutex(t_symposium *data)
 {
 	if (!init_array_mutex(data->symp_mutex, MAX_MUTEX))
 		return (0);
-	if (!init_array_mutex(data->fork_mutex, num_philos))
+	if (!init_array_mutex(data->fork_mutex, data->num_philos))
 	{
 		destroy_array_mutex(data->symp_mutex, MAX_MUTEX);
 		return (0);
@@ -66,13 +66,13 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 		int flag_stop_eat)
 {
 	add_parse_data(roundtable, data, flag_stop_eat);
-	if (!init_symposium_mutex(roundtable))
-		return (0);
 	if (!alloc_chairs_and_forks(roundtable))
-		return (abort_symposium(roundtable, MALLOC_FAILED));
+		return (0);
+	if (!init_symposium_mutex(roundtable))
+		return (abort_symposium(roundtable, MUTEX_FAILED));
 	if (!get_time(&roundtable->start))
 		return (abort_symposium(roundtable, GET_TIME_FAILED));
-	pthread_mutex_lock(&roundtable->mutex[INIT_MUTEX]);
+	pthread_mutex_lock(&roundtable->symp_mutex[INIT_MUTEX]);
 	roundtable->threads_ready = 0;
 	if (!create_philos(data, roundtable))
 		return (abort_symposium(roundtable, PHILOS_DELETED));
@@ -80,6 +80,6 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 			delphi_oracle_routine, (void *)roundtable) != 0)
 		return (abort_symposium(roundtable, DELPHI_ORACLE_FAILED));
 	roundtable->threads_ready = 1;
-	pthread_mutex_unlock(&roundtable->mutex[INIT_MUTEX]);
+	pthread_mutex_unlock(&roundtable->symp_mutex[INIT_MUTEX]);
 	return (clean_up(roundtable, SUCCESS_RETURN));//Correct?
 }

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 17:54:11 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 18:13:09 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	destroy_symposium_mutex(t_symposium *data)
 
 	return_status = 1;
 	if (!destroy_array_mutex(data->symp_mutex, MAX_MUTEX)
-		|| !destroy_array_mutex(data->fork_mutex, num_philos))
+		|| !destroy_array_mutex(data->fork_mutex, data->num_philos))
 		return_status = 0;
 	return (return_status);
 }
@@ -35,10 +35,11 @@ int	single_clean(t_symposium *data, int now_is_turn_to)
 
 	//Do some of this functions print a message in case of error?
 	return_status = 1;
-	if (now_is_turn_to == DESTROY_MUTEX)//Last to manage
-		return_status = destroy_symposium_mutex(data, MAX_MUTEX);
-	else if (now_is_turn_to == FREE_ALLOCATIONS)
+	
+	if (now_is_turn_to == FREE_ALLOCATIONS)//Last to manage
 		free_table(data);
+	else if (now_is_turn_to == DESTROY_MUTEX)
+		return_status = destroy_symposium_mutex(data);
 	else if (now_is_turn_to == DESTROY_PHILOS)
 		return_status = destroy_philos(data, data->num_philos);
 	else if (now_is_turn_to == DESTROY_DELPHI_ORACLE)//First to manage
@@ -78,17 +79,16 @@ int	abort_symposium(t_symposium *roundtable, int error)
 {
 	while (1)
 	{
-		if (error == MALLOC_FAILED)
+		if (error == MUTEX_FAILED)
 		{
-			single_clean(roundtable, DESTROY_MUTEX);
+			single_clean(roundtable, FREE_ALLOCATIONS);
 			break ;
 		}
 		else if (error == PHILOS_DELETED)
 		{
+			pthread_mutex_unlock(&roundtable->symp_mutex[INIT_MUTEX]);
+			single_clean(roundtable, DESTROY_MUTEX);
 			print_message("Error: failed while creating philos\n", 2);
-			single_clean(roundtable, FREE_ALLOCATIONS);
-			pthread_mutex_unlock(&roundtable->mutex[INIT_MUTEX]);//Locked after malloc
-			//Before destroy mutex, they have to be unlocked
 		}
 		else if (error == DELPHI_ORACLE_FAILED)
 		{

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 19:33:09 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 18:00:29 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int		create_symposium(unsigned int *data,
 /*	*	*	mutex_init_and_destroy.c	*	*	*/
 int		destroy_single_mutex(pthread_mutex_t *mutex);
 int		init_single_mutex(pthread_mutex_t *mutex);
-int		destroy_symposium_mutex(t_symposium *data, int max_index);
-int		init_symposium_mutex(t_symposium *data);
+int		destroy_array_mutex(pthread_mutex_t *array, int max_index);
+int		init_array_mutex(pthread_mutex_t *array, int max_index);
 //
 //
 /*	*	*	* clean_functions.c	*	*	*	*/

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 17:07:59 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 17:51:26 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 18:01:45 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	init_single_mutex(pthread_mutex_t *mutex)
 	return (1);
 }
 
-int	destroy_array_mutex(t_symposium *data, int max_index)
+int	destroy_array_mutex(pthread_mutex_t *array, int max_index)
 {
 	int	return_status;
 	int	i;
@@ -49,23 +49,23 @@ int	destroy_array_mutex(t_symposium *data, int max_index)
 	i = 0;
 	while (i < max_index)
 	{
-		if (!destroy_single_mutex(&data->mutex[i]))
+		if (!destroy_single_mutex(&array[i]))
 			return_status = 0;
 		++i;
 	}
 	return (return_status);
 }
 
-int	init_array_mutex(t_symposium *data, int max_index)
+int	init_array_mutex(pthread_mutex_t *array, int max_index)
 {
 	int	i;
 
 	i = 0;
 	while (i < max_index)
 	{
-		if (!init_single_mutex(&data->mutex[i]))
+		if (!init_single_mutex(&array[i]))
 		{
-			destroy_array_mutex(data, i)
+			destroy_array_mutex(array, i);
 			return (0);
 		}
 		++i;
