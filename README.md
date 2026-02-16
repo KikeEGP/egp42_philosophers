@@ -55,4 +55,4 @@ Same as above, but execution has been requested for 10 meals for each philo. Whe
   
   • "Programs, Processes, Threads and Multi-threading". Chamuditha Kekulawala, Nov 15, 2024. <https>https://medium.com/@ckekula/computer-architecture-for-beginners-multi-threading-de99bdca6c49</https>
   
-  • "Arquitectura de sistemas" course from **© Universidad Carlos III de Madrid**, CC BY-NC-SA. <http>https://www.it.uc3m.es/pbasanta/asng/course_notes/threads_es.html</https> 
+  • "Arquitectura de sistemas. Parte I.  Programación en C. Capítulo 11. Los hilos". Course from **© Universidad Carlos III de Madrid**, CC BY-NC-SA. <http>https://www.it.uc3m.es/pbasanta/asng/course_notes/threads_es.html</https> 
