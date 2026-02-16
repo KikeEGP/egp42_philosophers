@@ -14,5 +14,4 @@ time arguments are in miliseconds, it is, 1000 part of a second
 
 **Resources**
   
-    • "Programs, Processes, Threads and Multi-threading" 
-        |_ https://medium.com/@ckekula/computer-architecture-for-beginners-multi-threading-de99bdca6c49
+  • "Programs, Processes, Threads and Multi-threading" -> <https>https://medium.com/@ckekula/computer-architecture-for-beginners-multi-threading-de99bdca6c49</https>
