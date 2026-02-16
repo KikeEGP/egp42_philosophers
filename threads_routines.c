@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 18:54:28 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/15 19:29:38 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*philo_routine(void *has_taken_a_seat)
 	
 	philo = (t_philo *)has_taken_a_seat;
 	table = philo->symposium;
-	wait_all_threads(table);	
+	//wait_all_threads(table);	
 	printf("%d Hello\n", philo->id);
 	//Log states function is already defined on utils.c
 //	Wait to symposium->threads_ready
