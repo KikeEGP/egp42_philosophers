@@ -1,5 +1,6 @@
 _This project has been created as part of the 42 curriculum by enrgil-p._
 
+
 <h1>Description</h1>
 
 This project consist in the "Dinining philosophers problem". As a first approach to concurrence and multi-threaded process, purpose of this project is to understand how can use this type of execution, the risks of deadlock and data races, and how to avoid them.
@@ -26,7 +27,9 @@ This project consist in the "Dinining philosophers problem". As a first approach
     Die
   
   If time to die is less, equal or slightly bigger than sum of eat_time and sleep time, one philo will die. Also in case of execute program with just one philo, which is the   minimum number needed of them for a succesful execution.
-  Program may stop if one philo dies, or if every philosopher has eat at least a given number of times -this is an optional argument. In other case, program should not stop,   so user should interrupt whenever consider it. 
+  Program may stop if one philo dies, or if every philosopher has eat at least a given number of times -this is an optional argument. In other case, program should not stop,   so user should interrupt whenever consider it.
+  
+
 
 <h1>Instructions</h1>
 
@@ -46,6 +49,7 @@ Creates 10 philos that needs 100 ms to eat and 100 ms to sleep. One will die at 
          ./philo 10 400 100 100 10
 Same as above, but execution has been requested for 10 meals for each philo. When each of them has reached this amount of meals, program should stop.
         
+
 
 <h1>Resources</h1>
   
