@@ -14,7 +14,7 @@ This project consist in the "Dinining philosophers problem". As a first approach
 
   Program creates a virtual roundtable of N philosophers, and prints a log of every state change of each on of them.
 
-  **States**
+  <h5>States</h5>
     
     Take one fork
     
