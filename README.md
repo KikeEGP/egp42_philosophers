@@ -52,6 +52,8 @@ Same as above, but execution has been requested for 10 meals for each philo. Whe
 
 
 <h1>Resources</h1>
+
+• "Dining philosophers problem". **Wikipedia®**, CC BY-SA. <https>https://en.wikipedia.org/wiki/Dining_philosophers_problem</https>
   
   • "Programs, Processes, Threads and Multi-threading". Chamuditha Kekulawala, Nov 15, 2024. <https>https://medium.com/@ckekula/computer-architecture-for-beginners-multi-threading-de99bdca6c49</https>
   
