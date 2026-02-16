@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 19:09:18 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:28:51 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,21 @@ typedef enum e_creation_failed
 	SUCCESS_RETURN = 4
 }	t_creation_failed;
 
+//Purpose: Check if fork is free, so philo still think and can check
+//		if delphi_oracle sets somebody has died
 typedef enum e_fork_state
 {
 	FORK_TAKEN = 0,
 	FORK_FREE
 }	t_fork_state;
+
+//Index of t_philo->hands[] (mutex)
+typedef enum e_mutex_philo_hands
+{
+	LEFT = 0,
+	RIGHT,
+	BOTH_HANDS
+}	t_mutex_philo_hands;
 
 //Time values are ms, miliseconds. 1 sec == 1.000 ms. 
 //ms will be stored in unsigned long long. "delphi_oracle" == monitor, observer
@@ -115,8 +125,7 @@ typedef struct s_philo
 	unsigned int		eaten_times;
 	pthread_t			thread;
 	int					fork;
-	pthread_mutex_t		right_hand;
-	pthread_mutex_t		left_hand;
+	pthread_mutex_t		hands[2];
 	t_symposium			*symposium;
 }	t_philo;
 

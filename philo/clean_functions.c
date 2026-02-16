@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 18:58:01 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:49:17 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int	single_clean(t_symposium *data, int now_is_turn_to)
 	else if (now_is_turn_to == DESTROY_DELPHI_ORACLE)
 	{
 		if (pthread_join(data->delphi_oracle, NULL) != 0)
+		{
+			print_message("Error. Join delphi_oracle's thread has failed\n", 2);
 			return_status = 0;
+		}
 	}
 	return (return_status);
 }

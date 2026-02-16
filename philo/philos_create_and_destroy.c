@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:06:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 19:16:13 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/16 19:49:38 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ int	destroy_philos(t_symposium *roundtable, int max_index)
 	int		return_status;
 	t_philo	current_philo;
 
-	index = max_index;
+	index = 0;
 	return_status = 1;
-	while (index >= 0)
+	while (index < max_index)
 	{
 		current_philo = roundtable->philos_array[index];
-		if (!destroy_single_mutex(&current_philo.right_hand)
-			|| !destroy_single_mutex(&current_philo.left_hand))
+		if (!destroy_array_mutex(current_philo.hands, BOTH_HANDS))
 			return_status = 0;
 		if (pthread_join(current_philo.thread, NULL) != 0)
+		{
+			print_message("Error. Join a philo's thread has failed\n", 2);
 			return_status = 0;
-		--index;
+		}
+		++index;
 	}
 	return (return_status);
 }
@@ -46,6 +48,8 @@ int	create_philos(unsigned int *data, t_symposium *roundtable)
 		new->fork = FORK_FREE;
 		new->eaten_times = 0;
 		new->symposium = roundtable;
+		if (!init_array_mutex(new->hands, BOTH_HANDS))
+			return (0);
 		//Needed mutex to get start?
 		new->last_meal = roundtable->start;
 		if (pthread_create(&new->thread, NULL,
