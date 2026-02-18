@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routines_utils.c                                   :+:      :+:    :+:   */
+/*   routines_states.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/15 18:49:16 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/18 17:55:37 by enrgil-p         ###   ########.fr       */
+/*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
+/*   Updated: 2026/02/18 20:22:12 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
-void	wait_all_threads(t_symposium *data, t_philo *philo)
+void	eat(t_symposium *table, t_philo *philo)
 {
-	while (data->threads_ready != 1)
-	{
-		if (data->threads_ready)
-			break ;
-		if (philo && philo->id % 2 == 0)
-			usleep(50000);
-	}
-	return ;
+	//Take first fork
+	//	Depends on id is even or odd
+	//Take second fork
+	//Do i need this?	pthread_mutex_lock(&table->symp_mutex[EAT_MUTEX]);
+	get_unix_time(&philo->last_meal);
+	state_change_log(EAT, philo, table);
+	//Do I need this?	pthread_mutex_unlock(&table->symp_mutex[EAT_MUTEX]);
 }

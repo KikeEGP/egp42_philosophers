@@ -6,15 +6,15 @@
 #    By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/22 10:52:16 by enrgil-p          #+#    #+#              #
-#    Updated: 2026/02/15 19:19:58 by enrgil-p         ###   ########.fr        #
+#    Updated: 2026/02/18 19:40:00 by enrgil-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 SOURCES =	main.c utils.c parse.c create_symposium.c\
 		mutex_init_and_destroy.c philos_create_and_destroy.c\
-		clean_functions.c threads_routines.c routines_utils.c\
-		time_manage.c
+		clean_functions.c time_manage.c\
+		threads_routines.c routines_general_utils.c routines_states.c
 
 #libft forbidden in this project
 

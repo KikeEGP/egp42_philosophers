@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/16 18:47:55 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/18 18:07:37 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 		return (0);
 	if (!init_symposium_mutex(roundtable))
 		return (abort_symposium(roundtable, MUTEX_FAILED));
-	if (!get_time(&roundtable->start))
+	if (!get_unix_time(&roundtable->start))
 		return (abort_symposium(roundtable, GET_TIME_FAILED));
 	pthread_mutex_lock(&roundtable->symp_mutex[INIT_MUTEX]);
 	roundtable->threads_ready = 0;

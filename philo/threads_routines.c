@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/18 17:54:10 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/18 20:23:43 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*delphi_oracle_routine(void *data)
 
 	symp = (t_symposium *)data;
 	wait_all_threads(symp, NULL);	
-	usleep(30000);
+	usleep(60000);
 	printf("Hello, i'm delphi orcale\n");
 	/*Wait to symposium->threads_ready
 	Check if philos are alive
@@ -26,23 +26,25 @@ void	*delphi_oracle_routine(void *data)
 	Check if some error?
 	if (symposium->eat_min_times != 0)
 		check_all_eaten_min_times*/
-	return (data);
+	return (data);//WHY I DO THIS?
 }
 
 void	*philo_routine(void *has_taken_a_seat)
 {
 	t_philo	*philo;
 	t_symposium *table;
+//	unsigned long long	time;//debug
 	
 	philo = (t_philo *)has_taken_a_seat;
 	table = philo->symposium;
-	wait_all_threads(table, philo);	
-	printf("%d Hello\n", philo->id);
-	//Log states function is already defined on utils.c
-//	Wait to symposium->threads_ready
+	wait_all_threads(table, philo);
+	//WHILE
+	//¿think()?
+	eat(table, philo);
 /*	if (philo->id % 2 == 0)
-		sleep(/?*);
-	while (*delphi_oracles orders stop*)
+		sleep(/?*);*/
+	//sleep();//State
+/*	while (*delphi_oracles orders stop*)
 	{
 		take_forks();//if n % 2 == 0, fork n - 1, else fork n
 				//Later, take the other
@@ -60,5 +62,5 @@ void	*philo_routine(void *has_taken_a_seat)
 			//Think is only time since philo has awaken 
 			//and starts to eat again. This means: waits free fork
 	}*/
-	return (has_taken_a_seat);
+	return (has_taken_a_seat);//WHY I DO THIS?
 }

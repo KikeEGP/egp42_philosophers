@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/16 19:28:51 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/18 20:23:11 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 # define ZERO_PHILOS "Error. n_philos's value can't be 0\n"
 //
 //Logs (messages for 'any state change of a philosopher')
-# define TAKE_FORK "%u %d has taken a fork\n" 
-# define EAT "%u %d is eating\n"
-# define SLEEP "%u %d is sleeping\n"
-# define THINK "%u %d is thinking\n"
-# define DIE "%u %d died\n"
+# define TAKE_FORK "%llu %d has taken a fork\n" 
+# define EAT "%llu %d is eating\n"
+# define SLEEP "%llu %d is sleeping\n"
+# define THINK "%llu %d is thinking\n"
+# define DIE "%llu %d died\n"
 
 //
 /*INDEX FOR PARSE_DATA*/
@@ -60,7 +60,7 @@ typedef enum e_flag_stop_eat
 typedef enum e_mutex_index
 {
 	INIT_MUTEX = 0,
-	EAT_MUTEX,
+	EATEN_TIMES_MUTEX,
 	DIE_MUTEX,
 	PRINT_MUTEX,
 	MAX_MUTEX

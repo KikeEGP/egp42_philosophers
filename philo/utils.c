@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:20:08 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/14 18:09:48 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/18 19:50:59 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ void	print_message(char *message, int fd)
 	write(fd, message, len_message);
 }
 
-/*
-void	state_change_log(char *message, *time?*, t_symposium *data)
-{
-	//Obtain time??
-	t_philo	philo;
 
-	philo = data->philos_array[*index?*];
-	printf(message, *time*, philo->id);
-}*/
+void	state_change_log(char *message, t_philo *philo, t_symposium *data)
+{
+	unsigned long long	current_time;
+
+	pthread_mutex_lock(&data->symp_mutex[PRINT_MUTEX]);
+	get_program_time(&current_time, data);//This function needs an if
+	printf(message, current_time, philo->id);
+	pthread_mutex_unlock(&data->symp_mutex[PRINT_MUTEX]);
+}
