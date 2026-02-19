@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/18 20:23:43 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/19 19:04:07 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	*philo_routine(void *has_taken_a_seat)
 {
 	t_philo	*philo;
 	t_symposium *table;
-//	unsigned long long	time;//debug
 	
 	philo = (t_philo *)has_taken_a_seat;
 	table = philo->symposium;
