@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/18 19:46:34 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:13:11 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	*delphi_oracle_routine(void *data);
 void	*philo_routine(void *data);
 /*	*    routines_general_utils.c	*	*/
 void	wait_all_threads(t_symposium *data, t_philo *philo);
+void	set_target_forks(unsigned int *left, unsigned int *right,
+			int philo_id, unsigned int num_philos);
 /*	*    	routines_states.c	*	*/
 void	eat(t_symposium *table, t_philo *philo);
 
