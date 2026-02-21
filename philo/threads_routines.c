@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/19 19:04:07 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/21 21:28:55 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	*philo_routine(void *has_taken_a_seat)
 	wait_all_threads(table, philo);
 	//WHILE
 	//¿think()?
-	eat(table, philo);
+	eat_state(table, philo);
 /*	if (philo->id % 2 == 0)
 		sleep(/?*);*/
-	//sleep();//State
+	sleep_state(table, philo);//State
 /*	while (*delphi_oracles orders stop*)
 	{
 		take_forks();//if n % 2 == 0, fork n - 1, else fork n

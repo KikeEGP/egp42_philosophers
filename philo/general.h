@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/21 21:15:55 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/21 21:29:11 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	state_change_log(char *message, t_philo *philo, t_symposium *data);
 void	take_fork(t_symposium *table, t_philo *philo, pthread_mutex_t *fork);
 void	wait_all_threads(t_symposium *data, t_philo *philo);
 /*	*    	routines_states.c	*	*/
-void	eat(t_symposium *table, t_philo *philo);
+void	eat_state(t_symposium *table, t_philo *philo);
+void	sleep_state(t_symposium *table, t_philo *philo);
 
 #endif

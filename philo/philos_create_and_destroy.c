@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:06:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/21 20:24:15 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/21 22:01:23 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	destroy_philos(t_symposium *roundtable, int max_index)
 	while (index < max_index)
 	{
 		current_philo = roundtable->philos_array[index];
-		if (!destroy_array_mutex(current_philo.hands, BOTH_HANDS))
-			return_status = 0;
 		if (pthread_join(current_philo.thread, NULL) != 0)
 		{
 			print_message("Error. Join a philo's thread has failed\n", 2);
@@ -55,16 +53,11 @@ int	create_philos(unsigned int *data, t_symposium *roundtable)
 	{
 		new = &roundtable->philos_array[counter];
 		new->id = counter + 1;
-		new->fork = FORK_FREE;
 		set_target_forks(new, roundtable->num_philos);
 		new->eaten_times = 0;
 		new->symposium = roundtable;
-		if (!init_array_mutex(new->hands, BOTH_HANDS))
-			return (0);
-		//Needed mutex to get start?
 		new->last_meal = roundtable->start;
-		if (pthread_create(&new->thread, NULL,
-				philo_routine, (void *)new) != 0)
+		if (pthread_create(&new->thread, NULL, philo_routine, (void *)new) != 0)
 		{
 			destroy_philos(roundtable, counter);
 			return (0);
