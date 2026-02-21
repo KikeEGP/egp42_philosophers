@@ -6,38 +6,39 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/20 14:12:10 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/21 21:14:38 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
-static /**/	take_both_forks(t_symposium *table, t_philo *philo)
+static void take_both_forks(t_symposium *table, t_philo *philo)
 {
-	unsigned int	left;
-	unsigned int	right;
+	int	left;
+	int	right;
 
-	set_target_forks(&left, &right, philo->id, table->num_philos);
+	left = philo->left_target;
+	right = philo->right_target;
 	if (table->num_philos == 1 && philo->id == 1)
-		//take one fork and wait to die;
+		return ;//debug
 	else if (philo->id % 2 != 0)
 	{
-		take_fork(table->fork_mutex[n]);
-		take_fork(table->fork_mutex[n - 1]);
+		take_fork(table, philo, &table->fork_mutex[left]);
+		take_fork(table, philo, &table->fork_mutex[right]);
 	}
 	else
 	{
-		take_fork(table->fork_mutex[n - 1]);
-		take_fork(table->fork_mutex[n]);
+		take_fork(table, philo, &table->fork_mutex[right]);
+		take_fork(table, philo, &table->fork_mutex[left]);
 	}
 }
 
 void	eat(t_symposium *table, t_philo *philo)
 {
-	//take_both_forks();
-	//Take first fork
-	//	Depends on id is even or odd
-	//Take second fork
+	take_both_forks(table, philo);
 	get_unix_time(&philo->last_meal);
 	state_change_log(EAT, philo, table);
+	//If needed to count meals, count.
+	//	If counted >= min_times_eat, change a flag
+	//Wait to eat_time and then you finish here
 }

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/18 20:23:11 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/21 20:14:40 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ typedef struct s_philo
 	unsigned int		eaten_times;
 	pthread_t			thread;
 	int					fork;
+	int					left_target;
+	int					right_target;
 	pthread_mutex_t		hands[2];
 	t_symposium			*symposium;
 }	t_philo;

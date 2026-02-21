@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:06:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/16 19:49:38 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/21 20:24:15 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ int	destroy_philos(t_symposium *roundtable, int max_index)
 	return (return_status);
 }
 
+static void	set_target_forks(t_philo *philo, unsigned int num_philos)
+{
+	philo->left_target = philo->id - 1;
+	if (philo->id == 1 && num_philos > 1)
+		philo->right_target = num_philos - 1;
+	else
+		philo->right_target = philo->id - 2;
+	return ;
+}
+
 int	create_philos(unsigned int *data, t_symposium *roundtable)
 {
 	unsigned int	counter;
@@ -46,6 +56,7 @@ int	create_philos(unsigned int *data, t_symposium *roundtable)
 		new = &roundtable->philos_array[counter];
 		new->id = counter + 1;
 		new->fork = FORK_FREE;
+		set_target_forks(new, roundtable->num_philos);
 		new->eaten_times = 0;
 		new->symposium = roundtable;
 		if (!init_array_mutex(new->hands, BOTH_HANDS))
