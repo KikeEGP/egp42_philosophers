@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/21 21:33:39 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/21 22:11:27 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void take_both_forks(t_symposium *table, t_philo *philo)
 	left = philo->left_target;
 	right = philo->right_target;
 	if (table->num_philos == 1 && philo->id == 1)
-		//
-		return ;//debug
 	else if (philo->id % 2 != 0)
 	{
 		take_fork(table, philo, &table->fork_mutex[left]);
