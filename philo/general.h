@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/20 14:13:11 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/21 21:15:55 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,22 @@
 /*
   	HERE YOU WILL FIND:
  
-  	1) header files needed by allowed functions for this project 
-		that has been used
-  	2) prototypes of functions created for this project
+  	1) header files needed by allowed functions for this project,
+		also definitions.h
+	2) prototypes of functions created for this project
 */
 
 # include <unistd.h>//write, usleep
 # include <stdio.h>//printf
 # include <stdlib.h>//malloc, free
-# include <string.h>//memset
-# include <pthread.h>
+# include <pthread.h>//threads and mutex functions
 # include <sys/time.h>//gettiimeofday
 # include <limits.h>//UINT_MAX
 # include "definitions.h"
 
-/*	*	utils.c	*	*/
+/*	*	main_utils.c	*	*/
 size_t	ft_strlen(const char *str);
 void	print_message(char *message, int fd);
-void	state_change_log(char *message, t_philo *philo, t_symposium *data);
 //
 //
 /*	*	*	*	parse.c	*	*	*	*	*/
@@ -73,10 +71,10 @@ int		create_philos(unsigned int *data, t_symposium *roundtable);
 /*	*	*	* threads_routines.c	*	*	*	*/
 void	*delphi_oracle_routine(void *data);
 void	*philo_routine(void *data);
-/*	*    routines_general_utils.c	*	*/
+/*	*    routines_utils.c	*	*/
+void	state_change_log(char *message, t_philo *philo, t_symposium *data);
+void	take_fork(t_symposium *table, t_philo *philo, pthread_mutex_t *fork);
 void	wait_all_threads(t_symposium *data, t_philo *philo);
-void	set_target_forks(unsigned int *left, unsigned int *right,
-			int philo_id, unsigned int num_philos);
 /*	*    	routines_states.c	*	*/
 void	eat(t_symposium *table, t_philo *philo);
 
