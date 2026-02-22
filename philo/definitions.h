@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 17:34:12 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:39:09 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ typedef struct s_philo
 	int					id;
 	unsigned long long	last_meal;
 	unsigned int		eaten_times;
-	int					finished_flag;
 	pthread_t			thread;
 	int					left_target;
 	int					right_target;

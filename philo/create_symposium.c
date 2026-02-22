@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/18 18:07:37 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:30:29 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,27 @@ static void	add_parse_data(t_symposium *data, unsigned int *parse_data,
 	data->eat_time = parse_data[TIME_EAT];
 	data->sleep_time = parse_data[TIME_SLEEP];
 	data->eat_min_times = parse_data[EAT_MIN_TIMES];
-	data->flag_stop_eat = flag_stop_eat;
-	data->dead_found = 0;
+	data->dinner_over = 0;
+}
+
+static int	alloc_checklist(t_symposium *symposium, int flag_stop_eat)
+{
+	unsigned int	expected;
+	int				i;
+
+	expected = symposium->num_philos;
+	if (!flag_stop_eat)
+		symposium->checklist = NULL;
+	else
+	{
+		symposium->checklist = (int *)malloc(expected * sizeof(int));
+		if (!symposium->checklist)
+			return (0);
+		i = 0;
+		while (i < expected)
+			symposium->checklist[i++] = 0;
+	}
+	return (1);
 }
 
 static int	alloc_chairs_and_forks(t_symposium *table)
@@ -65,7 +84,8 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 		int flag_stop_eat)
 {
 	add_parse_data(roundtable, data, flag_stop_eat);
-	if (!alloc_chairs_and_forks(roundtable))
+	if (!alloc_chairs_and_forks(roundtable)
+		|| !alloc_checklist(roundtable, flag_stop_eat))
 		return (0);
 	if (!init_symposium_mutex(roundtable))
 		return (abort_symposium(roundtable, MUTEX_FAILED));

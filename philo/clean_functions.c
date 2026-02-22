@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/16 19:49:17 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:29:48 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	free_table(t_symposium *roundtable)
 {
 	free(roundtable->fork_mutex);
 	free(roundtable->philos_array);
+	if (roundtable->checklist != NULL)
+		free(roundtable->checklist);
 }
 
 static int	destroy_symposium_mutex(t_symposium *data)

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 18:49:16 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 14:46:52 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 16:37:16 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	oracle_counsel(t_symposium *symposium)
 
 	counsel_given = 1;
 	pthread_mutex_lock(&symposium->symp_mutex[DIE_MUTEX]);
-	if (symposium->dead_found)
+	if (symposium->dinner_over)
 		counsel_given = 0;
 	pthread_mutex_unlock(&symposium->symp_mutex[DIE_MUTEX]);
 	return (counsel_given);

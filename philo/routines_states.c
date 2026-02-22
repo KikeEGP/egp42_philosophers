@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 14:53:51 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:03:17 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	eat_state(t_symposium *table, t_philo *philo)
 		release_forks(table, philo);
 		return (0);
 	}
+	//mutex
 	//	If counted >= min_times_eat, change a flag
 	return (1);
 }

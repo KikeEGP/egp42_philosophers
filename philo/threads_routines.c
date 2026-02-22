@@ -6,26 +6,51 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 14:52:27 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:48:57 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
+static int	philos_finished(t_symposium *symposium, int index,
+			t_philo *philo_observed)
+{
+	static unsigned int	sum;
+
+	if (symposium->checklist != NULL && !symposium->checklist[index]
+		&& philo_observed->eaten_times >= symposium->eat_min_times)
+	{
+		symposium->checklist[index] = 1;
+		sum += 1;
+		if (sum == symposium->num_philos)
+			return (1);
+	}
+	return (0);
+}
+
 void	*delphi_oracle_routine(void *data)
 {
-	t_symposium	*symp;
+	t_symposium	*symposium;
+	int		index;
+	t_philo		*philo_observed;
 
-	symp = (t_symposium *)data;
-	wait_all_threads(symp, NULL);	
-	usleep(60000);
-	printf("Hello, i'm delphi orcale\n");
-	/*Wait to symposium->threads_ready
-	Check if philos are alive
-		//symp.philos_array[all].life_timer < symp.die_time
-	Check if some error?
-	if (symposium->eat_min_times != 0)
-		check_all_eaten_min_times*/
+	symposium = (t_symposium *)data;
+	wait_all_threads(symposium, NULL);	
+	index = 0;
+	while (1)
+	{
+		if (index == symposium->num_philos)
+			index = 0;
+		//mutex?
+		philo_observed = symposium->philos_array[index];
+		if (!check_time(philo_observed->last_meal, data->die_time)
+			|| philos_finished(symposium, index, philo_observed))
+		{
+			data->dinner_over == 1;
+			break ;
+		}
+		++philo_index;
+	}
 	return (data);//WHY I DO THIS?
 }
 
