@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 18:03:55 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:50:49 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef enum e_parse_data_index
 //also check those counters or not
 typedef enum e_flag_stop_eat
 {
-	EAT_AND_STOP,
-	NON_STOP
+	NON_STOP,
+	EAT_AND_STOP
 }	t_flag_stop_eat;
 
 //

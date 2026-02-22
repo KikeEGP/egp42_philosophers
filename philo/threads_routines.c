@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 18:08:16 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 19:11:50 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	philos_finished(t_symposium *symposium, int index,
 	static unsigned int	sum;
 
 	pthread_mutex_lock(&symposium->symp_mutex[EATEN_TIMES_MUTEX]);
-	if (symposium->checklist != NULL && !symposium->checklist[index]
+	if (!symposium->checklist[index]
 		&& philo_observed->eaten_times >= symposium->eat_min_times)
 	{
 		symposium->checklist[index] = 1;
@@ -28,6 +28,20 @@ static int	philos_finished(t_symposium *symposium, int index,
 			return (1);
 	}
 	pthread_mutex_unlock(&symposium->symp_mutex[EATEN_TIMES_MUTEX]);
+	return (0);
+}
+
+static int	dinner_may_stop(t_symposium *symposium, unsigned int index,
+			t_philo *philo_observed)
+{
+	if (!check_time(philo_observed->last_meal, symposium->die_time))
+	{
+		die_state(symposium, philo_observed);
+		return (1);
+	}
+	else if (symposium->checklist != NULL
+		&& philos_finished(symposium, index, philo_observed))
+		return (1);
 	return (0);
 }
 
@@ -44,10 +58,9 @@ void	*delphi_oracle_routine(void *data)
 	{
 		if (index == symposium->num_philos)
 			index = 0;
-		pthread_mutex_lock(&symposium->symp_mutex[DIE_MUTEX]);
 		philo_observed = &symposium->philos_array[index];
-		if (!check_time(philo_observed->last_meal, symposium->die_time)
-			|| philos_finished(symposium, index, philo_observed))
+		pthread_mutex_lock(&symposium->symp_mutex[DIE_MUTEX]);
+		if (dinner_may_stop(symposium, index, philo_observed))
 		{
 			symposium->dinner_over = 1;
 			pthread_mutex_unlock(&symposium->symp_mutex[DIE_MUTEX]);

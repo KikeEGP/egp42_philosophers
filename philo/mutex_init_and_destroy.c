@@ -6,12 +6,13 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 17:07:59 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 18:01:45 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 19:20:12 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
+//Error message were so useful to debug
 int	destroy_single_mutex(pthread_mutex_t *mutex)
 {
 	int	check;

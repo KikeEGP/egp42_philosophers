@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 19:00:51 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 19:17:23 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ static void	print_expected_usage(int error_fd)
 	print_message(EXPECTED_USAGE_2, error_fd);
 }
 
+static int	set_flag_stop_eat(int argc)
+{
+	if (argc == 5)
+		return (NON_STOP);
+	else
+		return (EAT_AND_STOP);
+}
+
 int	main(int argc, char **argv)
 {
 	t_symposium		program_data;
@@ -26,11 +34,9 @@ int	main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6)
 	{
-		flag_stop_eat = NON_STOP;
+		flag_stop_eat = set_flag_stop_eat(argc);
 		if (!parse_arguments(argc, argv, parse_data))
 			return (1);
-		if (argc == 6 && parse_data[EAT_MIN_TIMES] == 0)
-			flag_stop_eat = EAT_AND_STOP;
 		if (!create_symposium(parse_data, &program_data, flag_stop_eat))
 			return (1);
 		return (0);

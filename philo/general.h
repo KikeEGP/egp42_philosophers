@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 14:54:15 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:30:42 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	*philo_routine(void *data);
 int	eat_state(t_symposium *table, t_philo *philo);
 int	sleep_state(t_symposium *table, t_philo *philo);
 void	think_state(t_symposium *table, t_philo *philo);
+void	die_state(t_symposium *table, t_philo *philo);
 /*	->	routines_utils.c	<-	*/
 int		oracle_counsel(t_symposium *symposium);
 void	state_change_log(char *message, t_philo *philo, t_symposium *data);
