@@ -6,14 +6,13 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 17:30:29 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:04:59 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
-static void	add_parse_data(t_symposium *data, unsigned int *parse_data,
-		int flag_stop_eat)
+static void	add_parse_data(t_symposium *data, unsigned int *parse_data)
 {
 	data->num_philos = parse_data[NUM_PHILOS];
 	data->die_time = parse_data[TIME_DIE];
@@ -26,7 +25,7 @@ static void	add_parse_data(t_symposium *data, unsigned int *parse_data,
 static int	alloc_checklist(t_symposium *symposium, int flag_stop_eat)
 {
 	unsigned int	expected;
-	int				i;
+	unsigned int	i;
 
 	expected = symposium->num_philos;
 	if (!flag_stop_eat)
@@ -83,7 +82,7 @@ static int	init_symposium_mutex(t_symposium *data)
 int	create_symposium(unsigned int *data, t_symposium *roundtable,
 		int flag_stop_eat)
 {
-	add_parse_data(roundtable, data, flag_stop_eat);
+	add_parse_data(roundtable, data);
 	if (!alloc_chairs_and_forks(roundtable)
 		|| !alloc_checklist(roundtable, flag_stop_eat))
 		return (0);

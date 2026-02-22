@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 17:48:57 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:08:16 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,24 @@ static int	philos_finished(t_symposium *symposium, int index,
 {
 	static unsigned int	sum;
 
+	pthread_mutex_lock(&symposium->symp_mutex[EATEN_TIMES_MUTEX]);
 	if (symposium->checklist != NULL && !symposium->checklist[index]
 		&& philo_observed->eaten_times >= symposium->eat_min_times)
 	{
 		symposium->checklist[index] = 1;
+		pthread_mutex_unlock(&symposium->symp_mutex[EATEN_TIMES_MUTEX]);
 		sum += 1;
 		if (sum == symposium->num_philos)
 			return (1);
 	}
+	pthread_mutex_unlock(&symposium->symp_mutex[EATEN_TIMES_MUTEX]);
 	return (0);
 }
 
 void	*delphi_oracle_routine(void *data)
 {
 	t_symposium	*symposium;
-	int		index;
+	unsigned int	index;
 	t_philo		*philo_observed;
 
 	symposium = (t_symposium *)data;
@@ -41,15 +44,17 @@ void	*delphi_oracle_routine(void *data)
 	{
 		if (index == symposium->num_philos)
 			index = 0;
-		//mutex?
-		philo_observed = symposium->philos_array[index];
-		if (!check_time(philo_observed->last_meal, data->die_time)
+		pthread_mutex_lock(&symposium->symp_mutex[DIE_MUTEX]);
+		philo_observed = &symposium->philos_array[index];
+		if (!check_time(philo_observed->last_meal, symposium->die_time)
 			|| philos_finished(symposium, index, philo_observed))
 		{
-			data->dinner_over == 1;
+			symposium->dinner_over = 1;
+			pthread_mutex_unlock(&symposium->symp_mutex[DIE_MUTEX]);
 			break ;
 		}
-		++philo_index;
+		pthread_mutex_unlock(&symposium->symp_mutex[DIE_MUTEX]);
+		++index;
 	}
 	return (data);//WHY I DO THIS?
 }

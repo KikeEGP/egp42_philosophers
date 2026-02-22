@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 17:39:09 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:03:55 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ typedef struct s_symposium
 	unsigned long long	eat_time;
 	unsigned long long	sleep_time;
 	unsigned int		eat_min_times;
-	int					flag_stop_eat;
-	int					dnner_over;
+	int					*checklist;
+	int					dinner_over;
 	pthread_mutex_t		symp_mutex[MAX_MUTEX];
 	pthread_mutex_t		*fork_mutex;
 	int					threads_ready;

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 17:03:17 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:10:38 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void take_both_forks(t_symposium *table, t_philo *philo)
 
 int	eat_state(t_symposium *table, t_philo *philo)
 {
+	//I do not take care of odd num_philos == 1 philo eats more than others
 	take_both_forks(table, philo);
 	get_unix_time(&philo->last_meal);//may protect here
 	state_change_log(EAT, philo, table);
@@ -44,8 +45,10 @@ int	eat_state(t_symposium *table, t_philo *philo)
 		release_forks(table, philo);
 		return (0);
 	}
-	//mutex
-	//	If counted >= min_times_eat, change a flag
+	pthread_mutex_lock(&table->symp_mutex[EATEN_TIMES_MUTEX]);
+	if (table->checklist)
+		philo->eaten_times += 1;
+	pthread_mutex_unlock(&table->symp_mutex[EATEN_TIMES_MUTEX]);
 	return (1);
 }
 
