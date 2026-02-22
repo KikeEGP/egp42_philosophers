@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 17:44:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/18 19:11:21 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 14:20:56 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	get_unix_time(unsigned long long *time_in_ms)
 	return (1);
 }
 
+//Program start time == 0
 int	get_program_time(unsigned long long *diff_in_ms, t_symposium *data)
 {
 	unsigned long long	current_time;
@@ -39,14 +40,29 @@ int	get_program_time(unsigned long long *diff_in_ms, t_symposium *data)
 	return (1);
 }
 
-int	check_time(unsigned long long last_meal,
+//Used by thread to check time to die of a thread
+int	check_time(unsigned long long state_start_time,
 		unsigned long long time_to_check)
 {
 	unsigned long long	now;
-
-	if (!get_unix_time(&now))
-		return (2);//Check this
-	if ((now - last_meal) >= time_to_check)
+	
+	//I used to check here if !get_unix_time, but finally I won't do it
+	get_unix_time(&now);
+	if ((now - state_start_time) >= time_to_check)
 		return (0);
+	return (1);
+}
+
+int	ft_usleep(unsigned long long delay_time, t_symposium *symposium)
+{
+	unsigned long long	state_start_time;
+
+	get_unix_time(&state_start_time);
+	while (check_time(state_start_time, delay_time))
+	{
+		usleep(500);
+		if (!oracle_counsel(symposium))
+			return (0);
+	}
 	return (1);
 }
