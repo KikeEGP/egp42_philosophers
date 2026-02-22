@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 18:10:38 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/22 19:39:18 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ static void take_both_forks(t_symposium *table, t_philo *philo)
 	left = philo->left_target;
 	right = philo->right_target;
 	if (table->num_philos == 1 && philo->id == 1)
-		return ;//debug
-		//Do something here
+	{
+		take_fork(table, philo, &table->fork_mutex[left]);
+		ft_usleep(table->die_time, table);//PS: Not checked this
+		//I put this line above last hour yesterday, not tried
+	}
 	else if (philo->id % 2 != 0)
 	{
 		take_fork(table, philo, &table->fork_mutex[left]);
@@ -37,6 +40,7 @@ static void take_both_forks(t_symposium *table, t_philo *philo)
 int	eat_state(t_symposium *table, t_philo *philo)
 {
 	//I do not take care of odd num_philos == 1 philo eats more than others
+	//	PS: "I do this in think_state", but must be checked
 	take_both_forks(table, philo);
 	get_unix_time(&philo->last_meal);//may protect here
 	state_change_log(EAT, philo, table);
@@ -61,7 +65,17 @@ int	sleep_state(t_symposium *table, t_philo *philo)
 	return (1);
 }
 
+//In order to be sure that every philo eats more or less the same times,
+//	think is great scope to put some delay to odd philos
+//	if num_philos is odd too
 void	think_state(t_symposium *table, t_philo *philo)
 {
 	state_change_log(THINK, philo, table);
+	if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
+		usleep(500);//Try with other values
+}
+
+void	die_state(t_symposium *table, t_philo *philo)
+{
+	state_change_log(DIE, philo, table);
 }
