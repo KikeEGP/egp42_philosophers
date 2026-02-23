@@ -6,9 +6,9 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 18:49:16 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/23 20:06:33 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 20:24:03 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/* *****************************************************:********************* */
 
 #include "general.h"
 
@@ -24,25 +24,32 @@ int	oracle_counsel(t_symposium *symposium)
 	return (counsel_given);
 }
 
-void	state_change_log(char *message, t_philo *philo, t_symposium *data)
+int	state_change_log(char *message, t_philo *philo,
+			t_symposium *data, int die_flag)
 {
 	unsigned long long	current_time;
 	
-	//oracle_counsel(data);
+	if (!die_flag && !oracle_counsel(data))
+		return (0);
 	pthread_mutex_lock(&data->symp_mutex[PRINT_MUTEX]);
 	get_program_time(&current_time, data);//This function needs an if
 	printf(message, current_time, philo->id);
 	pthread_mutex_unlock(&data->symp_mutex[PRINT_MUTEX]);
+	return (1);
 }
 
-void	take_fork(t_symposium *table, t_philo *philo, pthread_mutex_t *fork)
+int	take_fork(t_symposium *table, t_philo *philo, pthread_mutex_t *fork)
 {
 	unsigned long long	unix_time;
 
 	pthread_mutex_lock(fork);
 	get_unix_time(&unix_time);
-	state_change_log(TAKE_FORK, philo, table);
-	printf("hola\n");
+	if (!state_change_log(TAKE_FORK, philo, table, 0))
+	{
+		pthread_mutex_unlock(fork);
+		return (0);
+	}
+	return (1);
 }
 
 void	release_forks(t_symposium *table, t_philo *philo)

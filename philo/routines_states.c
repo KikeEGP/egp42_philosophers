@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/23 20:01:14 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 20:21:00 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ int	eat_state(t_symposium *table, t_philo *philo)
 	pthread_mutex_lock(&table->symp_mutex[EATEN_TIMES_MUTEX]);
 	get_unix_time(&philo->last_meal);//may protect here
 	pthread_mutex_unlock(&table->symp_mutex[EATEN_TIMES_MUTEX]);
-	state_change_log(EAT, philo, table);
-	if (!ft_usleep(table->eat_time, table))
+	if (!state_change_log(EAT, philo, table, 0) || !ft_usleep(table->eat_time, table))
 	{
 		release_forks(table, philo);
 		return (0);
@@ -66,8 +65,8 @@ int	eat_state(t_symposium *table, t_philo *philo)
 int	sleep_state(t_symposium *table, t_philo *philo)
 {
 	release_forks(table, philo);
-	state_change_log(SLEEP, philo, table);
-	if (!ft_usleep(table->sleep_time, table))
+	if (!state_change_log(SLEEP, philo, table, 0)
+		|| !ft_usleep(table->sleep_time, table))
 		return (0);
 	return (1);
 }
@@ -77,7 +76,7 @@ int	sleep_state(t_symposium *table, t_philo *philo)
 //	if num_philos is odd too
 void	think_state(t_symposium *table, t_philo *philo)
 {
-	state_change_log(THINK, philo, table);
+	state_change_log(THINK, philo, table, 0);
 	if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
 		usleep(850);//Try with other values
 			    //THINK THIS BETTER. THIS IS DONE ALWAYS
@@ -85,5 +84,5 @@ void	think_state(t_symposium *table, t_philo *philo)
 
 void	die_state(t_symposium *table, t_philo *philo)
 {
-	state_change_log(DIE, philo, table);
+	state_change_log(DIE, philo, table, 1);
 }
