@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:04:49 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 19:17:23 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:39:34 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ int	main(int argc, char **argv)
 	if (argc == 5 || argc == 6)
 	{
 		flag_stop_eat = set_flag_stop_eat(argc);
-		if (!parse_arguments(argc, argv, parse_data))
-			return (1);
-		if (!create_symposium(parse_data, &program_data, flag_stop_eat))
+		if (!parse_arguments(argc, argv, parse_data)
+			|| !create_symposium(parse_data, &program_data, flag_stop_eat))
 			return (1);
 		return (0);
 	}

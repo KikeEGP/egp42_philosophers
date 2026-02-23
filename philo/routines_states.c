@@ -6,13 +6,13 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 19:39:18 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:50:31 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
-static void take_both_forks(t_symposium *table, t_philo *philo)
+static void	take_both_forks(t_symposium *table, t_philo *philo)
 {
 	int	left;
 	int	right;
@@ -72,7 +72,7 @@ void	think_state(t_symposium *table, t_philo *philo)
 {
 	state_change_log(THINK, philo, table);
 	if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
-		usleep(500);//Try with other values
+		usleep(850);//Try with other values
 }
 
 void	die_state(t_symposium *table, t_philo *philo)

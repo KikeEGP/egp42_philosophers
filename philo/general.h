@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 18:30:42 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:44:31 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int		create_philos(unsigned int *data, t_symposium *roundtable);
 void	*delphi_oracle_routine(void *data);
 void	*philo_routine(void *data);
 /*	->    	routines_states.c	<-	*/
-int	eat_state(t_symposium *table, t_philo *philo);
-int	sleep_state(t_symposium *table, t_philo *philo);
+int		eat_state(t_symposium *table, t_philo *philo);
+int		sleep_state(t_symposium *table, t_philo *philo);
 void	think_state(t_symposium *table, t_philo *philo);
 void	die_state(t_symposium *table, t_philo *philo);
 /*	->	routines_utils.c	<-	*/

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 19:11:50 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:46:36 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ static int	dinner_may_stop(t_symposium *symposium, unsigned int index,
 
 void	*delphi_oracle_routine(void *data)
 {
-	t_symposium	*symposium;
+	t_symposium		*symposium;
 	unsigned int	index;
-	t_philo		*philo_observed;
+	t_philo			*philo_observed;
 
 	symposium = (t_symposium *)data;
-	wait_all_threads(symposium, NULL);	
+	wait_all_threads(symposium, NULL);
 	index = 0;
 	while (1)
 	{
@@ -74,9 +74,9 @@ void	*delphi_oracle_routine(void *data)
 
 void	*philo_routine(void *has_taken_a_seat)
 {
-	t_philo	*philo;
-	t_symposium *table;
-	
+	t_philo		*philo;
+	t_symposium	*table;
+
 	philo = (t_philo *)has_taken_a_seat;
 	table = philo->symposium;
 	wait_all_threads(table, philo);

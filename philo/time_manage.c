@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 17:44:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 14:20:56 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:50:04 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_time(unsigned long long state_start_time,
 		unsigned long long time_to_check)
 {
 	unsigned long long	now;
-	
+
 	//I used to check here if !get_unix_time, but finally I won't do it
 	get_unix_time(&now);
 	if ((now - state_start_time) >= time_to_check)

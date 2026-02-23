@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 18:54:05 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:38:11 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	alloc_checklist(t_symposium *symposium, int flag_stop_eat)
 	unsigned int	i;
 
 	expected = symposium->num_philos;
-	if (!flag_stop_eat)
+	if (flag_stop_eat == NON_STOP)
 		symposium->checklist = NULL;
 	else
 	{
