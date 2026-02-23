@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 17:44:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/23 18:50:04 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 19:47:18 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	ft_usleep(unsigned long long delay_time, t_symposium *symposium)
 	while (check_time(state_start_time, delay_time))
 	{
 		usleep(500);
+		//When time is near to delay_time, argument of usleep must be less, to be sure that function stops at right time
 		if (!oracle_counsel(symposium))
 			return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 18:49:16 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 18:51:33 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 20:06:33 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	oracle_counsel(t_symposium *symposium)
 void	state_change_log(char *message, t_philo *philo, t_symposium *data)
 {
 	unsigned long long	current_time;
-
+	
+	//oracle_counsel(data);
 	pthread_mutex_lock(&data->symp_mutex[PRINT_MUTEX]);
 	get_program_time(&current_time, data);//This function needs an if
 	printf(message, current_time, philo->id);
@@ -41,6 +42,7 @@ void	take_fork(t_symposium *table, t_philo *philo, pthread_mutex_t *fork)
 	pthread_mutex_lock(fork);
 	get_unix_time(&unix_time);
 	state_change_log(TAKE_FORK, philo, table);
+	printf("hola\n");
 }
 
 void	release_forks(t_symposium *table, t_philo *philo)
@@ -51,7 +53,8 @@ void	release_forks(t_symposium *table, t_philo *philo)
 	left = philo->left_target;
 	right = philo->right_target;
 	pthread_mutex_unlock(&table->fork_mutex[left]);
-	pthread_mutex_unlock(&table->fork_mutex[right]);
+	if (right >= 0)
+		pthread_mutex_unlock(&table->fork_mutex[right]);
 	return ;
 }
 
