@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/23 18:37:59 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/23 19:04:12 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define EXPECTED_USAGE_1 "Error. Expected usage: ./philo n_philos time_to_die "
 # define EXPECTED_USAGE_2 "time_to_eat time_to_sleep [n_meals for each philo]\n"
 # define WRONG_ARG "Error. Some argument can't be converted to unsigned int\n"
-# define ZERO_PHILOS "Error. n_philos's value can't be 0\n"
+# define ZERO_PHILOS "Error. n_philos value can't be 0\n"
 //
 //Logs (messages for 'any state change of a philosopher')
 # define TAKE_FORK "%llu %d has taken a fork\n" 
