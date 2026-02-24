@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/24 19:21:27 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/24 21:12:23 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef enum e_flag_stop_eat
 typedef enum e_mutex_index
 {
 	INIT_MUTEX = 0,
-	EATEN_TIMES_MUTEX,
+	EAT_MUTEX,
 	DIE_MUTEX,
 	PRINT_MUTEX,
 	MAX_MUTEX

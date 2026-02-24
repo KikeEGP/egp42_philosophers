@@ -6,11 +6,25 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:06:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/21 22:01:23 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/24 21:12:15 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
+
+static t_philo	select_philo(t_symposium *roundtable, int index)
+{
+	t_philo	selected_philo;
+
+	/*The select_philo line got a fail on helgrind.
+	ChatGPT told me that problem was because maybe philo is still
+	alive, so I must use this EAT_MUTEX (maybe change name from EATEN)
+	to make sure there is no data race*/
+	pthread_mutex_lock(&roundtable->symp_mutex[EATEN_TIMES_MUTEX]);
+	selected_philo = roundtable->philos_array[index];
+	pthread_mutex_unlock(&roundtable->symp_mutex[EATEN_TIMES_MUTEX]);
+	return (selected_philo);
+}
 
 int	destroy_philos(t_symposium *roundtable, int max_index)
 {
@@ -22,7 +36,7 @@ int	destroy_philos(t_symposium *roundtable, int max_index)
 	return_status = 1;
 	while (index < max_index)
 	{
-		current_philo = roundtable->philos_array[index];
+		current_philo = select_philo(roundtable, index);
 		if (pthread_join(current_philo.thread, NULL) != 0)
 		{
 			print_message("Error. Join a philo's thread has failed\n", 2);
