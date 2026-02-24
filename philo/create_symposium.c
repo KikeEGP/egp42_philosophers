@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/23 18:38:11 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/24 19:20:47 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,11 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 	if (!get_unix_time(&roundtable->start))
 		return (abort_symposium(roundtable, GET_TIME_FAILED));
 	pthread_mutex_lock(&roundtable->symp_mutex[INIT_MUTEX]);
-	roundtable->threads_ready = 0;
 	if (!create_philos(data, roundtable))
 		return (abort_symposium(roundtable, PHILOS_DELETED));
 	if (pthread_create(&roundtable->delphi_oracle, NULL,
 			delphi_oracle_routine, (void *)roundtable) != 0)
 		return (abort_symposium(roundtable, DELPHI_ORACLE_FAILED));
-	roundtable->threads_ready = 1;
 	pthread_mutex_unlock(&roundtable->symp_mutex[INIT_MUTEX]);
 	return (clean_up(roundtable, SUCCESS_RETURN));
 }

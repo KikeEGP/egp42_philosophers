@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/23 19:04:12 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/24 19:21:27 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct s_symposium
 	int					dinner_over;
 	pthread_mutex_t		symp_mutex[MAX_MUTEX];
 	pthread_mutex_t		*fork_mutex;
-	int					threads_ready;
 	pthread_t			delphi_oracle;
 	struct s_philo		*philos_array;
 }	t_symposium;
