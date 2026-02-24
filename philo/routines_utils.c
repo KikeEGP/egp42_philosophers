@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 18:49:16 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/23 20:06:33 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/24 18:28:01 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,8 @@ void	release_forks(t_symposium *table, t_philo *philo)
 	return ;
 }
 
-void	wait_all_threads(t_symposium *data, t_philo *philo)
+void	wait_all_threads(t_symposium *data)
 {
-	while (data->threads_ready != 1)
-	{
-		if (data->threads_ready)
-			break ;
-	}
-	if (philo && philo->id % 2 == 0)
-		usleep(500);//Try with max 850 || 900 µs
-	return ;
+	pthread_mutex_lock(&data->symp_mutex[INIT_MUTEX]);
+	pthread_mutex_unlock(&data->symp_mutex[INIT_MUTEX]);
 }

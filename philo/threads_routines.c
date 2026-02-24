@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/23 18:46:36 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/24 18:28:41 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*delphi_oracle_routine(void *data)
 	t_philo			*philo_observed;
 
 	symposium = (t_symposium *)data;
-	wait_all_threads(symposium, NULL);
+	wait_all_threads(symposium);
 	index = 0;
 	while (1)
 	{
@@ -79,7 +79,7 @@ void	*philo_routine(void *has_taken_a_seat)
 
 	philo = (t_philo *)has_taken_a_seat;
 	table = philo->symposium;
-	wait_all_threads(table, philo);
+	wait_all_threads(table);
 	while (1)
 	{
 		think_state(table, philo);
