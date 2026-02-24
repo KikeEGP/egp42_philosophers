@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 18:49:16 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/24 18:28:01 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/24 19:19:54 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	take_fork(t_symposium *table, t_philo *philo, pthread_mutex_t *fork)
 	pthread_mutex_lock(fork);
 	get_unix_time(&unix_time);
 	state_change_log(TAKE_FORK, philo, table);
-	printf("hola\n");
 }
 
 void	release_forks(t_symposium *table, t_philo *philo)
