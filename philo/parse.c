@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:11:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/15 19:19:07 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/25 18:16:53 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	check_chars(char *argument)
 
 	i = 0;
 	if (argument[i] != '+' && !char_is_digit(argument[i]))
-		//	CHECK THIS. May be || instead of &&, isn't it?
 		return (0);
 	while (argument[++i] != '\0')
 	{
