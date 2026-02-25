@@ -14,7 +14,9 @@
 
 static void	free_table(t_symposium *roundtable)
 {
-	free(roundtable->fork_mutex);
+	//Another way to correct frees from create_symposium: put every line here below an if. 
+	//For that, you should declare first this pointers to NULL on add_parse_data (change name)
+ 	free(roundtable->fork_mutex);
 	free(roundtable->philos_array);
 	if (roundtable->checklist != NULL)
 		free(roundtable->checklist);
