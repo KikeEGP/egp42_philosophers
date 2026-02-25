@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/25 19:04:54 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/25 20:49:05 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	sleep_state(t_symposium *table, t_philo *philo)
 //	if num_philos is odd too
 void	think_state(t_symposium *table, t_philo *philo)
 {
+	if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
+		usleep(1000);
 	state_change_log(THINK, philo, table);
 	//BE SURE TO APPLY THE CORRECT DELAY, BUT OUT OF THINK
 	/*if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
