@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/22 17:29:48 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/25 18:36:11 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	free_table(t_symposium *roundtable)
 {
-	//Another way to correct frees from create_symposium: put every line here below an if. 
-	//For that, you should declare first this pointers to NULL on add_parse_data (change name)
  	free(roundtable->fork_mutex);
 	free(roundtable->philos_array);
 	if (roundtable->checklist != NULL)

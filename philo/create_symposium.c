@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:59:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/24 19:20:47 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/25 18:34:37 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ static int	alloc_checklist(t_symposium *symposium, int flag_stop_eat)
 	{
 		symposium->checklist = (int *)malloc(expected * sizeof(int));
 		if (!symposium->checklist)
+		{
+			print_message("Error: failed trying to alloc meals checklist\n", 2);
+			single_clean(symposium, FREE_ALLOCATIONS);
 			return (0);
+		}
 		i = 0;
 		while (i < expected)
 			symposium->checklist[i++] = 0;
@@ -64,7 +68,6 @@ static int	alloc_chairs_and_forks(t_symposium *table)
 		print_message("Error: failed trying to alloc fork_mutex\n", 2);
 		return (0);
 	}
-	//PUT HERE call to alloc_checklist. If fails, you must free these arrays
 	return (1);
 }
 
@@ -85,7 +88,7 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 {
 	add_parse_data(roundtable, data);
 	if (!alloc_chairs_and_forks(roundtable)
-		|| !alloc_checklist(roundtable, flag_stop_eat))//TWO CHOICES: PUT HERE ON A NEW IF, OR REMOVE FROM HERE AND DO THIS INSIDE ALLOC_CHAIRS_aND_FORKS
+		|| !alloc_checklist(roundtable, flag_stop_eat))
 		return (0);
 	if (!init_symposium_mutex(roundtable))
 		return (abort_symposium(roundtable, MUTEX_FAILED));
