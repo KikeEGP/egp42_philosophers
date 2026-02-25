@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/23 20:01:14 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/25 18:11:49 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,21 @@ int	eat_state(t_symposium *table, t_philo *philo)
 	if (!take_both_forks(table, philo))
 		return (0);
 	//NEED A MUYTEX HERE?
-	pthread_mutex_lock(&table->symp_mutex[EATEN_TIMES_MUTEX]);
+	pthread_mutex_lock(&table->symp_mutex[EAT_MUTEX]);
 	get_unix_time(&philo->last_meal);//may protect here
 	//may unify mutex from EAT and DIE to someone like LIFE, to use always same one.
 	//Also may put here some check of time and make sure here only dies some thread
-	pthread_mutex_unlock(&table->symp_mutex[EATEN_TIMES_MUTEX]);
+	pthread_mutex_unlock(&table->symp_mutex[EAT_MUTEX]);
 	state_change_log(EAT, philo, table);
 	if (!ft_usleep(table->eat_time, table))
 	{
 		release_forks(table, philo);
 		return (0);
 	}
-	pthread_mutex_lock(&table->symp_mutex[EATEN_TIMES_MUTEX]);
+	pthread_mutex_lock(&table->symp_mutex[EAT_MUTEX]);
 	if (table->checklist)
 		philo->eaten_times += 1;
-	pthread_mutex_unlock(&table->symp_mutex[EATEN_TIMES_MUTEX]);
+	pthread_mutex_unlock(&table->symp_mutex[EAT_MUTEX]);
 	return (1);
 }
 

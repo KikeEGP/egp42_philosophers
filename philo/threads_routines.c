@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/24 18:28:41 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/25 18:10:56 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ static int	philos_finished(t_symposium *symposium, int index,
 {
 	static unsigned int	sum;
 
-	pthread_mutex_lock(&symposium->symp_mutex[EATEN_TIMES_MUTEX]);
+	pthread_mutex_lock(&symposium->symp_mutex[EAT_MUTEX]);
 	if (!symposium->checklist[index]
 		&& philo_observed->eaten_times >= symposium->eat_min_times)
 	{
 		symposium->checklist[index] = 1;
-		pthread_mutex_unlock(&symposium->symp_mutex[EATEN_TIMES_MUTEX]);
+		pthread_mutex_unlock(&symposium->symp_mutex[EAT_MUTEX]);
 		sum += 1;
 		if (sum == symposium->num_philos)
 			return (1);
 	}
-	pthread_mutex_unlock(&symposium->symp_mutex[EATEN_TIMES_MUTEX]);
+	pthread_mutex_unlock(&symposium->symp_mutex[EAT_MUTEX]);
 	return (0);
 }
 
