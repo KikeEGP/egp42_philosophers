@@ -25,6 +25,7 @@ static int	check_chars(char *argument)
 
 	i = 0;
 	if (argument[i] != '+' && !char_is_digit(argument[i]))
+		//	CHECK THIS. May be || instead of &&, isn't it?
 		return (0);
 	while (argument[++i] != '\0')
 	{
