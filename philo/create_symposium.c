@@ -64,6 +64,7 @@ static int	alloc_chairs_and_forks(t_symposium *table)
 		print_message("Error: failed trying to alloc fork_mutex\n", 2);
 		return (0);
 	}
+	//PUT HERE call to alloc_checklist. If fails, you must free these arrays
 	return (1);
 }
 
@@ -84,7 +85,7 @@ int	create_symposium(unsigned int *data, t_symposium *roundtable,
 {
 	add_parse_data(roundtable, data);
 	if (!alloc_chairs_and_forks(roundtable)
-		|| !alloc_checklist(roundtable, flag_stop_eat))
+		|| !alloc_checklist(roundtable, flag_stop_eat))//TWO CHOICES: PUT HERE ON A NEW IF, OR REMOVE FROM HERE AND DO THIS INSIDE ALLOC_CHAIRS_aND_FORKS
 		return (0);
 	if (!init_symposium_mutex(roundtable))
 		return (abort_symposium(roundtable, MUTEX_FAILED));
