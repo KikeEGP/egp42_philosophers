@@ -61,4 +61,5 @@ void	wait_all_threads(t_symposium *data)
 {
 	pthread_mutex_lock(&data->symp_mutex[INIT_MUTEX]);
 	pthread_mutex_unlock(&data->symp_mutex[INIT_MUTEX]);
+	//May add here a delay for even philos?
 }
