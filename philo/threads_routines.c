@@ -58,7 +58,7 @@ void	*delphi_oracle_routine(void *data)
 	{
 		if (index == symposium->num_philos)
 			index = 0;
-		philo_observed = &symposium->philos_array[index];
+		philo_observed = &symposium->philos_array[index];//May I put this below mutex_lock?
 		pthread_mutex_lock(&symposium->symp_mutex[DIE_MUTEX]);
 		if (dinner_may_stop(symposium, index, philo_observed))
 		{
