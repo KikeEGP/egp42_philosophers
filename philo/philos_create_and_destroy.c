@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:06:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/25 18:09:44 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/25 18:56:34 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static t_philo	select_philo(t_symposium *roundtable, int index)
 	ChatGPT told me that problem was because maybe philo is still
 	alive, so I must use this EAT_MUTEX (maybe change name from EATEN)
 	to make sure there is no data race*/
-	pthread_mutex_lock(&roundtable->symp_mutex[EAT_MUTEX]);
+	pthread_mutex_lock(&roundtable->symp_mutex[CONTROL]);
 	selected_philo = roundtable->philos_array[index];
-	pthread_mutex_unlock(&roundtable->symp_mutex[EAT_MUTEX]);
+	pthread_mutex_unlock(&roundtable->symp_mutex[CONTROL]);
 	return (selected_philo);
 }
 

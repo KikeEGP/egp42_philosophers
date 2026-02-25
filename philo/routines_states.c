@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/25 18:11:49 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/25 19:04:54 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,24 @@ static int	take_both_forks(t_symposium *table, t_philo *philo)
 
 int	eat_state(t_symposium *table, t_philo *philo)
 {
-	//I do not take care of odd num_philos == 1 philo eats more than others
-	//	PS: "I do this in think_state", but must be checked
 	if (!take_both_forks(table, philo))
 		return (0);
 	//NEED A MUYTEX HERE?
-	pthread_mutex_lock(&table->symp_mutex[EAT_MUTEX]);
+	pthread_mutex_lock(&table->symp_mutex[CONTROL]);
 	get_unix_time(&philo->last_meal);//may protect here
 	//may unify mutex from EAT and DIE to someone like LIFE, to use always same one.
 	//Also may put here some check of time and make sure here only dies some thread
-	pthread_mutex_unlock(&table->symp_mutex[EAT_MUTEX]);
+	pthread_mutex_unlock(&table->symp_mutex[CONTROL]);
 	state_change_log(EAT, philo, table);
 	if (!ft_usleep(table->eat_time, table))
 	{
 		release_forks(table, philo);
 		return (0);
 	}
-	pthread_mutex_lock(&table->symp_mutex[EAT_MUTEX]);
+	pthread_mutex_lock(&table->symp_mutex[CONTROL]);
 	if (table->checklist)
 		philo->eaten_times += 1;
-	pthread_mutex_unlock(&table->symp_mutex[EAT_MUTEX]);
+	pthread_mutex_unlock(&table->symp_mutex[CONTROL]);
 	return (1);
 }
 
@@ -80,9 +78,11 @@ int	sleep_state(t_symposium *table, t_philo *philo)
 void	think_state(t_symposium *table, t_philo *philo)
 {
 	state_change_log(THINK, philo, table);
-	if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
+	//BE SURE TO APPLY THE CORRECT DELAY, BUT OUT OF THINK
+	/*if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
 		usleep(850);//Try with other values
 			    //THINK THIS BETTER. THIS IS DONE ALWAYS
+			    */
 }
 
 void	die_state(t_symposium *table, t_philo *philo)

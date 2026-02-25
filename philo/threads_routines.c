@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/25 18:10:56 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/25 19:02:04 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ static int	philos_finished(t_symposium *symposium, int index,
 {
 	static unsigned int	sum;
 
-	pthread_mutex_lock(&symposium->symp_mutex[EAT_MUTEX]);
+	pthread_mutex_lock(&symposium->symp_mutex[CONTROL]);
 	if (!symposium->checklist[index]
 		&& philo_observed->eaten_times >= symposium->eat_min_times)
 	{
 		symposium->checklist[index] = 1;
-		pthread_mutex_unlock(&symposium->symp_mutex[EAT_MUTEX]);
+		pthread_mutex_unlock(&symposium->symp_mutex[CONTROL]);
 		sum += 1;
 		if (sum == symposium->num_philos)
 			return (1);
 	}
-	pthread_mutex_unlock(&symposium->symp_mutex[EAT_MUTEX]);
+	pthread_mutex_unlock(&symposium->symp_mutex[CONTROL]);
 	return (0);
 }
 
@@ -59,14 +59,14 @@ void	*delphi_oracle_routine(void *data)
 		if (index == symposium->num_philos)
 			index = 0;
 		philo_observed = &symposium->philos_array[index];//May I put this below mutex_lock?
-		pthread_mutex_lock(&symposium->symp_mutex[DIE_MUTEX]);
+		pthread_mutex_lock(&symposium->symp_mutex[CONTROL]);
 		if (dinner_may_stop(symposium, index, philo_observed))
 		{
 			symposium->dinner_over = 1;
-			pthread_mutex_unlock(&symposium->symp_mutex[DIE_MUTEX]);
+			pthread_mutex_unlock(&symposium->symp_mutex[CONTROL]);
 			break ;
 		}
-		pthread_mutex_unlock(&symposium->symp_mutex[DIE_MUTEX]);
+		pthread_mutex_unlock(&symposium->symp_mutex[CONTROL]);
 		++index;
 	}
 	return (data);//WHY I DO THIS?
@@ -80,6 +80,8 @@ void	*philo_routine(void *has_taken_a_seat)
 	philo = (t_philo *)has_taken_a_seat;
 	table = philo->symposium;
 	wait_all_threads(table);
+	if (philo->id % 2 == 0)
+		usleep(500);
 	while (1)
 	{
 		think_state(table, philo);
