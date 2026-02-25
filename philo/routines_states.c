@@ -49,6 +49,8 @@ int	eat_state(t_symposium *table, t_philo *philo)
 	//NEED A MUYTEX HERE?
 	pthread_mutex_lock(&table->symp_mutex[EATEN_TIMES_MUTEX]);
 	get_unix_time(&philo->last_meal);//may protect here
+	//may unify mutex from EAT and DIE to someone like LIFE, to use always same one.
+	//Also may put here some check of time and make sure here only dies some thread
 	pthread_mutex_unlock(&table->symp_mutex[EATEN_TIMES_MUTEX]);
 	state_change_log(EAT, philo, table);
 	if (!ft_usleep(table->eat_time, table))
