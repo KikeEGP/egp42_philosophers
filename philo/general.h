@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:05:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/24 18:28:17 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/26 14:06:03 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	think_state(t_symposium *table, t_philo *philo);
 void	die_state(t_symposium *table, t_philo *philo);
 /*	->	routines_utils.c	<-	*/
 int		oracle_counsel(t_symposium *symposium);
-void	state_change_log(char *message, t_philo *philo, t_symposium *data);
+void	state_change_log(char *message, t_philo *philo, t_symposium *data,
+			int oracle_glance);
 void	take_fork(t_symposium *table, t_philo *philo, pthread_mutex_t *fork);
 void	release_forks(t_symposium *table, t_philo *philo);
 void	wait_all_threads(t_symposium *data);

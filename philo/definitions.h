@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/25 18:54:00 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/26 14:08:05 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef enum e_parse_data_index
 typedef enum e_flag_stop_eat
 {
 	NON_STOP = 0,
-	EAT_AND_STOP
+	EAT_AND_STOP,
+	ORACLE_FOUND_DEAD,
 }	t_flag_stop_eat;
 
 //
@@ -61,7 +62,7 @@ typedef enum e_mutex_index
 {
 	INIT_MUTEX = 0,
 //	EAT_MUTEX,
-//	DIE_MUTEX,
+	//DIE_MUTEX,
 	CONTROL,
 	PRINT_MUTEX,
 	MAX_MUTEX

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/25 20:49:05 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/26 14:05:06 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,13 @@ static int	take_both_forks(t_symposium *table, t_philo *philo)
 
 int	eat_state(t_symposium *table, t_philo *philo)
 {
-	if (!take_both_forks(table, philo))
+	if (!oracle_counsel(table) || !take_both_forks(table, philo))
 		return (0);
 	//NEED A MUYTEX HERE?
 	pthread_mutex_lock(&table->symp_mutex[CONTROL]);
-	get_unix_time(&philo->last_meal);//may protect here
-	//may unify mutex from EAT and DIE to someone like LIFE, to use always same one.
-	//Also may put here some check of time and make sure here only dies some thread
+	get_unix_time(&philo->last_meal);
 	pthread_mutex_unlock(&table->symp_mutex[CONTROL]);
-	state_change_log(EAT, philo, table);
+	state_change_log(EAT, philo, table, NON_STOP);
 	if (!ft_usleep(table->eat_time, table))
 	{
 		release_forks(table, philo);
@@ -66,7 +64,7 @@ int	eat_state(t_symposium *table, t_philo *philo)
 int	sleep_state(t_symposium *table, t_philo *philo)
 {
 	release_forks(table, philo);
-	state_change_log(SLEEP, philo, table);
+	state_change_log(SLEEP, philo, table, NON_STOP);
 	if (!ft_usleep(table->sleep_time, table))
 		return (0);
 	return (1);
@@ -79,7 +77,7 @@ void	think_state(t_symposium *table, t_philo *philo)
 {
 	if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
 		usleep(1000);
-	state_change_log(THINK, philo, table);
+	state_change_log(THINK, philo, table, NON_STOP);
 	//BE SURE TO APPLY THE CORRECT DELAY, BUT OUT OF THINK
 	/*if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
 		usleep(850);//Try with other values
@@ -89,5 +87,5 @@ void	think_state(t_symposium *table, t_philo *philo)
 
 void	die_state(t_symposium *table, t_philo *philo)
 {
-	state_change_log(DIE, philo, table);
+	state_change_log(DIE, philo, table, ORACLE_FOUND_DEAD);
 }
