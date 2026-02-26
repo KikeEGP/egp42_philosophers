@@ -6,20 +6,18 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:06:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/25 18:56:34 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/26 19:47:42 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
+//Needed a mutex here to be sure that philo_thread joined it's not working
+//	at same time
 static t_philo	select_philo(t_symposium *roundtable, int index)
 {
 	t_philo	selected_philo;
 
-	/*The select_philo line got a fail on helgrind.
-	ChatGPT told me that problem was because maybe philo is still
-	alive, so I must use this EAT_MUTEX (maybe change name from EATEN)
-	to make sure there is no data race*/
 	pthread_mutex_lock(&roundtable->symp_mutex[CONTROL]);
 	selected_philo = roundtable->philos_array[index];
 	pthread_mutex_unlock(&roundtable->symp_mutex[CONTROL]);

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:32:12 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/25 18:36:11 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/26 19:43:01 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	free_table(t_symposium *roundtable)
 {
- 	free(roundtable->fork_mutex);
+	free(roundtable->fork_mutex);
 	free(roundtable->philos_array);
 	if (roundtable->checklist != NULL)
 		free(roundtable->checklist);
@@ -36,7 +36,6 @@ int	single_clean(t_symposium *data, int now_is_turn_to)
 {
 	int	return_status;
 
-	//Do some of this functions print a message in case of error?
 	return_status = 1;
 	if (now_is_turn_to == FREE_ALLOCATIONS)
 		free_table(data);

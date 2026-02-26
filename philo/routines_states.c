@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 19:27:31 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/26 19:42:24 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static int	take_both_forks(t_symposium *table, t_philo *philo)
 	if (table->num_philos == 1 && philo->id == 1)
 	{
 		take_fork(table, philo, &table->fork_mutex[left]);
-		ft_usleep(table->die_time, table);//PS: Not checked this
-		//I put this line above last hour yesterday, not tried
+		ft_usleep(table->die_time, table);
 		release_forks(table, philo);
 		return (0);
 	}
@@ -44,7 +43,6 @@ int	eat_state(t_symposium *table, t_philo *philo)
 {
 	if (!oracle_counsel(table) || !take_both_forks(table, philo))
 		return (0);
-	//NEED A MUYTEX HERE?
 	pthread_mutex_lock(&table->symp_mutex[CONTROL]);
 	get_unix_time(&philo->last_meal);
 	pthread_mutex_unlock(&table->symp_mutex[CONTROL]);

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 18:49:16 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 14:06:30 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/26 19:44:59 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	oracle_counsel(t_symposium *symposium)
 	return (counsel_given);
 }
 
-void	state_change_log(char *message, t_philo *philo, t_symposium *data, int oracle_glance)
+void	state_change_log(char *message, t_philo *philo, t_symposium *data,
+		int oracle_glance)
 {
 	unsigned long long	current_time;
-	
-	//oracle_counsel(data);
+
 	pthread_mutex_lock(&data->symp_mutex[PRINT_MUTEX]);
-	get_program_time(&current_time, data);//This function needs an if
+	get_program_time(&current_time, data);
 	if (oracle_glance != ORACLE_FOUND_DEAD && !oracle_counsel(data))
 	{
 		pthread_mutex_unlock(&data->symp_mutex[PRINT_MUTEX]);
