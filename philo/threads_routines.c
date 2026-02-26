@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 14:07:51 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/26 17:33:47 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ static int	philos_finished(t_symposium *symposium, int index,
 static int	dinner_may_stop(t_symposium *symposium, unsigned int index,
 			t_philo *philo_observed)
 {
+	pthread_mutex_lock(&symposium->symp_mutex[CONTROL]);
 	if (!check_time(philo_observed->last_meal, symposium->die_time))
 	{
 		symposium->dinner_over = 1;
-		die_state(symposium, philo_observed);
 		pthread_mutex_unlock(&symposium->symp_mutex[CONTROL]);
+		die_state(symposium, philo_observed);
 		return (1);
 	}
 	else if (symposium->checklist != NULL
@@ -63,7 +64,6 @@ void	*delphi_oracle_routine(void *data)
 		if (index == symposium->num_philos)
 			index = 0;
 		philo_observed = &symposium->philos_array[index];
-		pthread_mutex_lock(&symposium->symp_mutex[CONTROL]);
 		if (dinner_may_stop(symposium, index, philo_observed))
 			break ;
 		++index;

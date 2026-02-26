@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 17:44:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 12:43:45 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/26 17:41:22 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,13 @@ int	ft_usleep(unsigned long long delay_time, t_symposium *symposium)
 	unsigned long long	state_start_time;
 
 	get_unix_time(&state_start_time);
-	while (check_time(state_start_time, delay_time))
+	usleep(delay_time * 500);
+	while (1)
 	{
-		usleep(500);
+	//	usleep(500);
 		//When time is near to delay_time, argument of usleep must be less, to be sure that function stops at right time
+		if (!check_time(state_start_time, delay_time))
+			break ;
 		if (!oracle_counsel(symposium))
 			return (0);
 	}
