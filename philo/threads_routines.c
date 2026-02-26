@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 17:33:47 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/26 19:22:29 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,14 @@ void	*philo_routine(void *has_taken_a_seat)
 	philo = (t_philo *)has_taken_a_seat;
 	table = philo->symposium;
 	wait_all_threads(table);
+	think_state(table, philo);
 	if (philo->id % 2 == 0)
-		usleep(500);
+		usleep(1000);
 	while (1)
 	{
-		think_state(table, philo);
 		if (!eat_state(table, philo) || !sleep_state(table, philo))
 			break ;
+		think_state(table, philo);
 	}
 	return (has_taken_a_seat);//WHY I DO THIS?
 }
