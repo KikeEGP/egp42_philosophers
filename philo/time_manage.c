@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 17:44:34 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 19:44:09 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/27 22:42:32 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_time(unsigned long long state_start_time,
 
 	//I used to check here if !get_unix_time, but finally I won't do it
 	get_unix_time(&now);
-	if ((now - state_start_time) > time_to_check)
+	if ((now - state_start_time) >= time_to_check)
 		return (0);
 	return (1);
 }
@@ -58,7 +58,8 @@ int	ft_usleep(unsigned long long delay_time, t_symposium *symposium)
 	unsigned long long	state_start_time;
 
 	get_unix_time(&state_start_time);
-	usleep(delay_time * 100);//Work here to make sure time works well (?)
+	//THIS COMMENT BELOW WAS SUGESTED BY CHATGPT
+	//usleep(delay_time * 100);//Work here to make sure time works well (?)
 	while (check_time(state_start_time, delay_time))
 	{
 		usleep(500);	

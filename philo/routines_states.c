@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 19:42:24 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/27 22:38:24 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	sleep_state(t_symposium *table, t_philo *philo)
 void	think_state(t_symposium *table, t_philo *philo)
 {
 	state_change_log(THINK, philo, table, NON_STOP);
-	if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
-		usleep(1000);
+/*	if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
+		usleep(1000);*///Commented by me
 }
 
 void	die_state(t_symposium *table, t_philo *philo)

@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 19:22:29 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/02/27 22:38:05 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	*delphi_oracle_routine(void *data)
 		if (dinner_may_stop(symposium, index, philo_observed))
 			break ;
 		++index;
+		usleep(200);//Sugested by chatgpt
 	}
 	return (data);//WHY I DO THIS?
 }
@@ -87,6 +88,8 @@ void	*philo_routine(void *has_taken_a_seat)
 		if (!eat_state(table, philo) || !sleep_state(table, philo))
 			break ;
 		think_state(table, philo);
+		if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
+			usleep(1000);//Add by me
 	}
 	return (has_taken_a_seat);//WHY I DO THIS?
 }
