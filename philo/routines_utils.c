@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 18:49:16 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 19:44:59 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/03/01 13:35:12 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	oracle_counsel(t_symposium *symposium)
 	int	counsel_given;
 
 	counsel_given = 1;
-	pthread_mutex_lock(&symposium->symp_mutex[CONTROL]);
+	pthread_mutex_lock(&symposium->symp_mutex[DIE_MUTEX]);
 	if (symposium->dinner_over)
 		counsel_given = 0;
-	pthread_mutex_unlock(&symposium->symp_mutex[CONTROL]);
+	pthread_mutex_unlock(&symposium->symp_mutex[DIE_MUTEX]);
 	return (counsel_given);
 }
 
@@ -56,9 +56,16 @@ void	release_forks(t_symposium *table, t_philo *philo)
 
 	left = philo->left_target;
 	right = philo->right_target;
-	pthread_mutex_unlock(&table->fork_mutex[left]);
-	if (right >= 0)
+	if (philo->id % 2 != 0)
+	{
+		pthread_mutex_unlock(&table->fork_mutex[left]);
 		pthread_mutex_unlock(&table->fork_mutex[right]);
+	}
+	else
+	{
+		pthread_mutex_unlock(&table->fork_mutex[right]);
+		pthread_mutex_unlock(&table->fork_mutex[left]);
+	}
 	return ;
 }
 
