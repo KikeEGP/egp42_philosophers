@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/03/01 18:52:25 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/03/01 19:19:30 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ int	eat_state(t_symposium *table, t_philo *philo)
 	get_unix_time(&philo->last_meal);
 	pthread_mutex_unlock(&table->symp_mutex[CONTROL]);
 	state_change_log(EAT, philo, table, NON_STOP);
-	pthread_mutex_lock(&table->symp_mutex[CONTROL]);
-	if (table->checklist)
-		philo->eaten_times += 1;
-	pthread_mutex_unlock(&table->symp_mutex[CONTROL]);
 	if (!ft_usleep(table->eat_time, table))
 	{
 		release_forks(table, philo);
 		return (0);
 	}
+	pthread_mutex_lock(&table->symp_mutex[CONTROL]);
+	if (table->checklist)
+		philo->eaten_times += 1;
+	pthread_mutex_unlock(&table->symp_mutex[CONTROL]);
 	return (1);
 }
 
