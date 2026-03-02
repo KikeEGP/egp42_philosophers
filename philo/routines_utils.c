@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 18:49:16 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/03/01 13:45:17 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/03/02 18:04:57 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	oracle_counsel(t_symposium *symposium)
 	return (counsel_given);
 }
 
-void	state_change_log(char *message, t_philo *philo, t_symposium *data,
+int	state_change_log(char *message, t_philo *philo, t_symposium *data,
 		int oracle_glance)
 {
 	unsigned long long	current_time;
@@ -34,10 +34,11 @@ void	state_change_log(char *message, t_philo *philo, t_symposium *data,
 	if (oracle_glance != ORACLE_FOUND_DEAD && !oracle_counsel(data))
 	{
 		pthread_mutex_unlock(&data->symp_mutex[PRINT_MUTEX]);
-		return ;
+		return (0);
 	}
 	printf(message, current_time, philo->id);
 	pthread_mutex_unlock(&data->symp_mutex[PRINT_MUTEX]);
+	return (1);
 }
 
 void	take_fork(t_symposium *table, t_philo *philo, pthread_mutex_t *fork)

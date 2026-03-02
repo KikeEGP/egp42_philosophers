@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:08:10 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/03/01 17:28:03 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/03/02 18:10:48 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	*delphi_oracle_routine(void *data)
 		//usleep(200);//Sugested by chatgpt
 		//usleep(100);//Sugested by chatgpt
 		//usleep(150);//Sugested by chatgpt
-		//usleep(500);//Sugested by chatgpt
 	}
 	return (data);//WHY I DO THIS?
 }
@@ -88,11 +87,11 @@ void	*philo_routine(void *has_taken_a_seat)
 		usleep(1000);
 	while (1)
 	{
-		if (!eat_state(table, philo) || !sleep_state(table, philo))
+		if (!eat_state(table, philo) || !sleep_state(table, philo)
+			|| !think_state(table, philo))
 			break ;
-		think_state(table, philo);
 		if (table->num_philos % 2 != 0 && philo->id % 2 != 0)
-			usleep(1000);//Add by me
+			usleep(1000);
 	}
 	return (has_taken_a_seat);//WHY I DO THIS?
 }

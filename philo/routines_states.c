@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/03/02 17:34:17 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/03/02 18:21:12 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	eat_state(t_symposium *table, t_philo *philo)
 	pthread_mutex_lock(&table->symp_mutex[CONTROL]);
 	get_unix_time(&philo->last_meal);
 	pthread_mutex_unlock(&table->symp_mutex[CONTROL]);
-	state_change_log(EAT, philo, table, NON_STOP);
-	if (!ft_usleep(table->eat_time, table))
+	if (!state_change_log(EAT, philo, table, NON_STOP)
+		|| !ft_usleep(table->eat_time, table))
 	{
 		release_forks(table, philo);
 		return (0);
@@ -62,15 +62,15 @@ int	eat_state(t_symposium *table, t_philo *philo)
 int	sleep_state(t_symposium *table, t_philo *philo)
 {
 	release_forks(table, philo);
-	state_change_log(SLEEP, philo, table, NON_STOP);
-	if (!ft_usleep(table->sleep_time, table))
+	if (!state_change_log(SLEEP, philo, table, NON_STOP)
+		|| !ft_usleep(table->sleep_time, table))
 		return (0);
 	return (1);
 }
 
-void	think_state(t_symposium *table, t_philo *philo)
+int	think_state(t_symposium *table, t_philo *philo)
 {
-	state_change_log(THINK, philo, table, NON_STOP);
+	return (state_change_log(THINK, philo, table, NON_STOP));
 }
 
 void	die_state(t_symposium *table, t_philo *philo)
