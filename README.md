@@ -58,3 +58,7 @@ Same as above, but execution has been requested for 10 meals for each philo. Whe
   • "Programs, Processes, Threads and Multi-threading". Chamuditha Kekulawala, Nov 15, 2024. <https>https://medium.com/@ckekula/computer-architecture-for-beginners-multi-threading-de99bdca6c49</https>
   
   • "Arquitectura de sistemas. Parte I.  Programación en C. Capítulo 11. Los hilos". Course from **© Universidad Carlos III de Madrid**, CC BY-NC-SA. <http>https://www.it.uc3m.es/pbasanta/asng/course_notes/threads_es.html</https> 
+
+
+<h3>Use of AI</h3>
+This project has been done with some help of ChatGPT, as advisor. Specifically to understand how works usleep() and to debug data races. To do this task, I wrote a prompt explaining my problem, the project and my student level. Then, I shared to the chatbot a part of the message printed by helgrind, and requested to ChatGPT to only ask me for more information about my program. I only allowed to give me an explanation when it has complete data to give me reasonable answer. This way, I not only learn more about how to avoid data races, but also how to read and understand helgrind.
