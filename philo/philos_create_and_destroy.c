@@ -6,36 +6,22 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:06:00 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 19:47:42 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/03/02 19:50:35 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "general.h"
 
-//Needed a mutex here to be sure that philo_thread joined it's not working
-//	at same time
-static t_philo	select_philo(t_symposium *roundtable, int index)
-{
-	t_philo	selected_philo;
-
-	pthread_mutex_lock(&roundtable->symp_mutex[CONTROL]);
-	selected_philo = roundtable->philos_array[index];
-	pthread_mutex_unlock(&roundtable->symp_mutex[CONTROL]);
-	return (selected_philo);
-}
-
 int	destroy_philos(t_symposium *roundtable, int max_index)
 {
 	int		index;
 	int		return_status;
-	t_philo	current_philo;
 
 	index = 0;
 	return_status = 1;
 	while (index < max_index)
 	{
-		current_philo = select_philo(roundtable, index);
-		if (pthread_join(current_philo.thread, NULL) != 0)
+		if (pthread_join(roundtable->philos_array[index].thread, NULL) != 0)
 		{
 			print_message("Error. Join a philo's thread has failed\n", 2);
 			return_status = 0;
