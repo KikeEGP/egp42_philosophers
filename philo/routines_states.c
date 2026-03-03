@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 19:36:35 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/03/02 18:21:12 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/03/03 17:43:59 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static int	take_both_forks(t_symposium *table, t_philo *philo)
 	return (1);
 }
 
+//eat_time is given time to philos to eat. While not completed this time,
+//a philo is still eating. So, a meal must be count after philo has eaten
 int	eat_state(t_symposium *table, t_philo *philo)
 {
 	if (!oracle_counsel(table) || !take_both_forks(table, philo))
