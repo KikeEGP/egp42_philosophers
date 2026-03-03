@@ -6,7 +6,7 @@
 /*   By: enrgil-p <enrgil-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:30:56 by enrgil-p          #+#    #+#             */
-/*   Updated: 2026/02/26 14:08:05 by enrgil-p         ###   ########.fr       */
+/*   Updated: 2026/03/03 17:32:48 by enrgil-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 	3) structs
 */
 
-//Errors
+//Parse errors
 # define EXPECTED_USAGE_1 "Error. Expected usage: ./philo n_philos time_to_die "
 # define EXPECTED_USAGE_2 "time_to_eat time_to_sleep [n_meals for each philo]\n"
 # define WRONG_ARG "Error. Some argument can't be converted to unsigned int\n"
@@ -47,8 +47,8 @@ typedef enum e_parse_data_index
 }	t_parse_data_index;
 
 //
-//EAT_AND_STOP && NON_STOP are flags to count or not-count eaten meals,
-//also check those counters or not
+//EAT_AND_STOP && NON_STOP are flags to count or not-count eaten meals.
+//NON_STOP is used to be sure if dinner is over before print.
 typedef enum e_flag_stop_eat
 {
 	NON_STOP = 0,
@@ -57,19 +57,17 @@ typedef enum e_flag_stop_eat
 }	t_flag_stop_eat;
 
 //
-/*INDEX FOR PARSE_DATA*/
-typedef enum e_mutex_index
+/*INDEX FOR SYMP_MUTEX*/
+typedef enum e_symp_mutex_index
 {
 	INIT_MUTEX = 0,
-//	EAT_MUTEX,
-	//DIE_MUTEX,
 	CONTROL,
 	PRINT_MUTEX,
 	MAX_MUTEX
-}	t_mutex_index;
+}	t_symp_mutex_index;
 
 //
-/*Flags to check what must be destroyed and free*/
+/*Flags to check where happened a fail and/or what must be destroyed and free*/
 typedef enum e_creation_failed
 {
 	CLEAN_UP_COMPLETED = 0,
@@ -102,7 +100,8 @@ typedef struct s_symposium
 	struct s_philo		*philos_array;
 }	t_symposium;
 
-//This struct is for every philo. All of them, stored in philos_array, above
+//This struct is for each philo. 
+//Every philo is stored on t_symposium ->philos_array
 typedef struct s_philo
 {
 	int					id;
