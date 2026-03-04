@@ -43,8 +43,6 @@ This project consist in the "Dinining philosophers problem". As a first approach
     
     make ---> Regular compile
 
-    nake fsanitize ---> Compile prepared to execute with fsanitize
-
     make clean ---> Remove objects created on compilation
 
     make fclean ---> Remove objects + exectuable
