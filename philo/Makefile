@@ -21,7 +21,6 @@ SOURCES =	main.c main_utils.c parse.c create_symposium.c\
 OBJECTS = $(SOURCES:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror -g3
-SANIT_FLAG = -fsanitize=address
 PTHREAD_FLAG = -pthread
 
 CC = cc
@@ -33,10 +32,6 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	$(CC) $(CFLAGS) $(PTHREAD_FLAG) $(OBJECTS) -o $(NAME)
 	$(info CREATED $(NAME))
-
-fsanitize: $(NAME)
-	$(CC) $(CFLAGS) $(SANIT_FLAG) $(PTHREAD_FLAG) $(OBJECTS) -o $(NAME)
-	$(info CREATED $(NAME) WITH FSANITIZE)
 
 clean:
 	$(RM) $(OBJECTS)
